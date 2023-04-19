@@ -1,10 +1,15 @@
 .modal {
+  display: none;
   position: relative;
   overflow-y: auto;
   margin: 0 auto;
   padding-top: 32px;
   padding-bottom: 39px;
   background-color: #f2f0f9;
+}
+
+.modal_active {
+  display: flex;
 }
 
 .modal__container {
@@ -64,7 +69,7 @@
   color: var(--gary, #c5c5c5);
 }
 
-.modal__button {
+.modal__button-eddit {
   height: 20px;
   color: var(--second-color, #6e6893);
   background-color: inherit;
@@ -74,12 +79,12 @@
   color .3s ease-in-out;
 }
 
-.modal__button:hover {
+.modal__button-eddit:hover {
   transform: scale(1.3);
   color:var(--violet, #6d5bd0);
 }
 
-.modal__button:active {
+.modal__button-eddit:active {
   color: var(--persian-blue, #4636c3);
 }
 
@@ -181,7 +186,8 @@
   text-transform: uppercase;
 }
 
-.form__input {
+.form__input,
+.form__input-diccount {
   display: inline-block;
   padding: 11px;
   width: 100%;
@@ -204,14 +210,14 @@
   padding-left: 50px;
 }
 
-.form__checkbox {
+.form__checkbox-discount {
   display: inline;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
 
-.form__checkbox:before {
+.form__checkbox-discount:before {
   content: '';
   position: absolute;
   top: 0;
@@ -225,11 +231,11 @@
   border: 1px solid var(--second-bg-color, #f4f2ff);
 }
 
-.form__checkbox:hover::before{
+.form__checkbox-discount:hover::before{
   border-color: var(--persian-blue, #4636c3);
 }
 
-.form__checkbox:after {
+.form__checkbox-discount:after {
   content: '';
   position: absolute;
   top: 12px;
@@ -243,7 +249,7 @@
   transform: rotate(-45deg);
 }
 
-.form__checkbox:checked:after {
+.form__checkbox-discount:checked:after {
   opacity: 1
 }
 
@@ -255,7 +261,7 @@
   border: none;
 }
 
-.form__text {
+.form__text-price {
   align-items: flex-start;
   margin: 0;
   font-family: 'Inter';
@@ -265,7 +271,7 @@
   color: var(--second-color, #6e6893);
 }
 
-.form__text-price {
+.form__total-price {
   margin: 0;
   font-size: 18px;
   line-height: calc(22/18);
@@ -296,7 +302,7 @@
     font-size: 20px;
   }
 
-  .modal__button {
+  .modal__button-eddit {
     justify-self: flex-start;
   }
 
@@ -329,7 +335,7 @@
     padding: 0 28px;
   }
 
-  .form__text {
+  .form__text-price {
     align-items: flex-start;
     margin: 0;
     font-family: 'Inter';
@@ -338,7 +344,7 @@
     color: var(--second-color, #6e6893);
   }
   
-  .form__text-price {
+  .form__total-price {
     font-size: 16px;
   }
 }
