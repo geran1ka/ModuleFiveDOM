@@ -1,0 +1,37 @@
+:root {
+  --main-color: #25213b;
+  --second-color: #6e6893;
+  --main-bg-color: #ffffff;
+  --second-bg-color: #f4f2ff;
+  --violet: #6d5bd0;
+  --light-violet: #8b83ba;
+  --light-gray: #c6c2de;
+  --gray: #c5c5c5;
+  --persian-blue: #4636c3;
+}
+
+.container {
+  --width: 1100px;
+  --padding: 100px;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    --width: 900px;
+    --padding: 40px;
+  }
+}
+
+@media (max-width: 740px) {
+  .container {
+    --width: 720px;
+    --padding: 30px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    --width: 600px;
+    --padding: 20px;
+  }
+}
