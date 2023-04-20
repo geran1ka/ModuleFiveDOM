@@ -36,26 +36,3 @@ const createList = (list) => {
 }
 
 createList();
-
-/*
-while (game) {
-  const text = getUserData();
-switch (text) {
-    case 'del':
-      console.log('del');
-      break;
-    case 'clear':
-      cmsList.textContent = '';
-      break;
-    case '':
-      break;
-    default:
-      print(text);
-      break;
-  }
-
-
-}
-
-console.log('Все');
-*/
