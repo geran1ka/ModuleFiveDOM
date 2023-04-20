@@ -26,7 +26,6 @@ const getResult = (text) => {
 
 const createList = (list) => {
   const text = getUserData();
-  console.log('text: ', text);
 
   if (text === undefined || text === 'exit') return;
 
