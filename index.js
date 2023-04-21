@@ -59,19 +59,22 @@ const goods = [
   },
 ];
 
+const arr = ['id', 'title', 'category', 'units', 'count', 'price', 'images'];
+
+
 const table = document.querySelector('.table');
 //const tHead = table.querySelector('.thead');
 const tBody = table.querySelector('.tbody');
 
-const createRow = (obj) => {
+const createRow = (obj, arr) => {
   const tr = document.createElement('tr');
-  Object.values(obj).map(item => {
+  arr.map(item => {
     const td = document.createElement('td');
-    td.textContent = item;
+    td.textContent = obj[item];
     return tr.append(td);
   });
   return tr;
 };
 
-const renderGoods = (array) => array.map(item => tBody.append(createRow(item)));
+const renderGoods = (array) => array.map(item => tBody.append(createRow(item, arr)));
 renderGoods(goods);
