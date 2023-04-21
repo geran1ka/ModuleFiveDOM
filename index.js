@@ -1,4 +1,5 @@
 'use strict';
+
 const goods = [
   {
     'id': 253842678,
@@ -59,7 +60,7 @@ const goods = [
 ];
 
 const table = document.querySelector('.table');
-const tHead = table.querySelector('.thead');
+//const tHead = table.querySelector('.thead');
 const tBody = table.querySelector('.tbody');
 
 const createRow = (obj) => {
