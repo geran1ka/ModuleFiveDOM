@@ -38,10 +38,6 @@ const goods = [
     'discont': 15,
     'count': 4,
     'units': 'шт',
-    'images': {
-      'small': 'img/tvboxmecool-m.jpg',
-      'big': 'img/tvboxmecool-b.jpg',
-    },
   },
   {
     'id': 246258248,
@@ -59,7 +55,7 @@ const goods = [
   },
 ];
 
-const arr = ['id', 'title', 'category', 'units', 'count', 'price', 'total', 'image'];
+const arr = ['id', 'title', 'category', 'units', 'count', 'price', 'total', 'images'];
 
 const table = document.querySelector('.table');
 const tableBody = table.querySelector('.table__body');
@@ -70,12 +66,13 @@ const createRow = (obj, arr, className) => {
   arr.map(item => {
     const cell = document.createElement('td');
     cell.classList = `${className} ${className}-${item}`;
+    console.log('item', obj[item]);
     if (item === 'total') {
       cell.textContent = `$${obj.count * obj.price}`;
-    } else if (item === 'image') {
+    } else if (item === 'images') {
       const btn = document.createElement('button');
       btn.classList = 'button button-table';
-      if (!item) {
+      if (!obj[item]) {
         btn.innerHTML = `
           <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M18.75 2.13375L17.8663 1.25L1.25 17.8663L2.13375 18.75L3.38375 17.5H16.25C16.5814 17.4995 16.899 17.3676 17.1333 17.1333C17.3676 16.899 17.4995 16.5814 17.5 16.25V3.38375L18.75 2.13375ZM16.25 16.25H4.63375L9.50437 11.3794L10.9913 12.8663C11.2257 13.1006 11.5435 13.2322 11.875 13.2322C12.2065 13.2322 12.5243 13.1006 12.7587 12.8663L13.75 11.875L16.25 14.3731V16.25ZM16.25 12.605L14.6337 10.9888C14.3993 10.7544 14.0815 10.6228 13.75 10.6228C13.4185 10.6228 13.1007 10.7544 12.8663 10.9888L11.875 11.98L10.3894 10.4944L16.25 4.63375V12.605Z"/>
