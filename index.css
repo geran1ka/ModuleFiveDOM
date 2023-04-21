@@ -1,14 +1,6 @@
-.table {
-  table-layout: fixed;
-  border-collapse: collapse;
-}
-
-tr {
-  border-bottom: 2px solid grey;
-}
-
-td, th {
-  padding: 10px 20px;
-  vertical-align: top;
-  border-bottom: 2px solid grey;
-}
+@import url("style/var.css");
+@import url("style/normalize.css");
+@import url("style/global.css");
+@import url("style/overlay.css");
+@import url("style/modal.css");
+@import url("style/smc.css");

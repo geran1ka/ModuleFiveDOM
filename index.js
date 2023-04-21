@@ -59,22 +59,22 @@ const goods = [
   },
 ];
 
-const arr = ['id', 'title', 'category', 'units', 'count', 'price', 'images'];
-
+const arr = ['id', 'title', 'category', 'units', 'count', 'price'];
 
 const table = document.querySelector('.table');
-//const tHead = table.querySelector('.thead');
-const tBody = table.querySelector('.tbody');
+const tableBody = table.querySelector('.table__body');
 
-const createRow = (obj, arr) => {
-  const tr = document.createElement('tr');
+const createRow = (obj, arr, className) => {
+  const row = document.createElement('tr');
+  row.classList = 'table__row';
   arr.map(item => {
-    const td = document.createElement('td');
-    td.textContent = obj[item];
-    return tr.append(td);
+    const cell = document.createElement('td');
+    cell.classList = `${className} ${className}-${item}`;
+    cell.textContent = obj[item];
+    return row.append(cell);
   });
-  return tr;
+  return row;
 };
 
-const renderGoods = (array) => array.map(item => tBody.append(createRow(item, arr)));
+const renderGoods = (array) => array.map(item => tableBody.append(createRow(item, arr, 'table__cell')));
 renderGoods(goods);
