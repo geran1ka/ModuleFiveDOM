@@ -1,0 +1,14 @@
+.table {
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 2px solid grey;
+}
+
+td, th {
+  padding: 10px 20px;
+  vertical-align: top;
+  border-bottom: 2px solid grey;
+}
