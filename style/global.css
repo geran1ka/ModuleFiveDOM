@@ -47,18 +47,15 @@ img, svg {
 button {
   padding: 0;
   cursor: pointer;
+  outline: inherit;
+  border: none;
+  background-color: inherit;
 }
 
 h1,
 h2,
 fieldset {
   margin: 0;
-}
-
-.button {
-  outline: inherit;
-  border: none;
-  background-color: inherit;
 }
 
 .visually-hidden {
