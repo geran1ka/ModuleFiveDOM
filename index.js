@@ -122,3 +122,20 @@ const createRow = ({id, title, category, units, count, price, images}) => {
 
 const renderGoods = (array) => array.map(item => tableBody.append(createRow(item)));
 renderGoods(goods);
+
+const btnAddProduct = document.querySelector('.button-add-product');
+const overlay = document.querySelector('.overlay');
+
+
+btnAddProduct.addEventListener('click', () => {
+  console.log('click');
+  overlay.classList.add('overlay_active');
+});
+
+overlay.addEventListener('click', e => {
+  const target = e.target;
+  if (target === overlay || target.closest('.modal__close')) {
+    overlay.classList.remove('overlay_active');
+  }
+});
+
