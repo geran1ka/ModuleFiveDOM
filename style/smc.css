@@ -237,7 +237,8 @@
 }
 
 .table__cell-total {
-  text-align: center;
+  text-align: end;
+  padding-right: 40px;
   width: 124px;
 }
 
