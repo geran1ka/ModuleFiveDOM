@@ -12,7 +12,7 @@ const createElement = (tag, attr, {append, appends, parent, cb} = {}) => {
     element.append(append);
   }
 
-  if (appends && appends.every(item => item instanceof HTMLAreaElement)) {
+  if (appends && appends.every(item => item instanceof HTMLElement)) {
     element.append(...appends);
   }
   // Проверка: есть ли у элемента ... и является ли он HTML элементом
@@ -205,129 +205,15 @@ const goods =
 // Итоговая стоимость
 const allTotalPrice = goods.reduce((acc, item) => acc + (item.price * item.count), 0);
 
+// Ячейки Заголовки таблицы
+
+const thTableList = Object.keys(tableTitle).map(item => createElement('th', {
+  className: `table__cell-title table__cell-${item}`,
+  textContent: `${tableTitle[item]}`,
+}));
+
 const cms = document.querySelector('.cms');
 
-const container = createElement('div', {
-  className: 'container',
-}, {
-  parent: cms,
-});
-
-const containerGroup = createElement('div', {
-  className: 'container__group',
-}, {
-  parent: container,
-});
-
-createElement('h2', {
-  className: 'title',
-  textContent: 'CMS',
-}, {
-  parent: containerGroup,
-});
-
-createElement('p', {
-  className: 'text',
-  textContent: 'Итоговая стоимость: ',
-}, {
-  parent: containerGroup,
-  append: createElement('span', {
-    className: 'text-alt',
-    textContent: `$${allTotalPrice}`,
-  }),
-});
-
-const containerBtn = createElement('div', {
-  className: 'container__btn',
-}, {
-  parent: container,
-});
-
-const filterBtn = createElement('button', {
-  className: 'button-filter',
-  type: 'button',
-  innerHTML: `
-    <svg class="button-filter__svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 12L20 4V0H0V4L8 12V20L12 16V12Z"/>
-    </svg>
-    <span class="button-filter__text">Фильтр</span>
-  `,
-}, {
-  parent: containerBtn,
-});
-
-const search = createElement('form', {
-  className: 'search',
-  innerHTML: `
-    <fieldset class="search">
-      <button class="search__button" type="submit">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M13.4097 14.8822C11.7399 16.1799 9.63851 16.7922 7.53338 16.5942C5.42824 16.3963 3.47766 15.403 2.07881 13.8166C0.679961 12.2303 -0.0619809 10.1701 0.00405863 8.05565C0.0700982 5.94118 0.939153 3.9314 2.43427 2.43552C3.92939 0.939633 5.93814 0.0701341 8.05152 0.00406071C10.1649 -0.0620127 12.224 0.680308 13.8096 2.07987C15.3951 3.47944 16.3879 5.43102 16.5857 7.53723C16.7836 9.64345 16.1717 11.7459 14.8745 13.4166L19.6936 18.2201C20.1016 18.6267 20.1022 19.2872 19.695 19.6946C19.2878 20.1021 18.6273 20.1017 18.2204 19.6939L13.4201 14.8822H13.4097ZM8.31916 14.5495C9.13773 14.5495 9.94829 14.3882 10.7045 14.0748C11.4608 13.7614 12.148 13.302 12.7268 12.7229C13.3056 12.1438 13.7647 11.4563 14.078 10.6996C14.3913 9.94298 14.5525 9.13201 14.5525 8.31302C14.5525 7.49403 14.3913 6.68306 14.078 5.92641C13.7647 5.16976 13.3056 4.48225 12.7268 3.90314C12.148 3.32402 11.4608 2.86465 10.7045 2.55123C9.94829 2.23782 9.13773 2.07651 8.31916 2.07651C6.66598 2.07651 5.08051 2.73356 3.91153 3.90314C2.74256 5.07271 2.08583 6.659 2.08583 8.31302C2.08583 9.96705 2.74256 11.5533 3.91153 12.7229C5.08051 13.8925 6.66598 14.5495 8.31916 14.5495Z"/>
-        </svg>
-      </button>
-      <input class="search__input" type="search" name="search" placeholder="Поиск по наименованию и категории">
-    </fieldset>
-  `,
-}, {
-  parent: containerBtn,
-});
-
-const buttonAddProduct = createElement('button', {
-  className: 'button-add-product',
-  type: 'button',
-  textContent: 'Добавить товар',
-}, {
-  parent: containerBtn,
-});
-
-// Верстка таблицы на JS
-const containerTable = createElement('div', {
-  className: 'scroll-box',
-}, {
-  parent: container,
-});
-
-const table = createElement('table', {
-  className: 'table',
-}, {
-  parent: containerTable,
-});
-
-const thead = createElement('thead', {
-  className: 'table__title',
-}, {
-  parent: table,
-});
-
-const tbody = createElement('tbody', {
-  className: 'table__tbody',
-}, {
-  parent: table,
-});
-
-const tfoot = createElement('tfoot', {
-  className: 'table__tfoot',
-}, {
-  parent: table,
-});
-
-// thead
-const titleRow = createElement('tr', {
-  className: 'table__row-title',
-}, {
-  parent: thead,
-});
-
-Object.keys(tableTitle).map(item => {
-  createElement('th', {
-    className: `table__cell-title table__cell-${item}`,
-    textContent: `${tableTitle[item]}`,
-  }, {
-    parent: titleRow,
-  });
-});
-
-// tbody
 const buttonTableImage = createElement('button', {
   className: 'button-table button-table__image',
   innerHTML: `
@@ -335,7 +221,7 @@ const buttonTableImage = createElement('button', {
       <path d="M17.7778 2.22223H2.22223C1.92754 2.22223 1.64493 2.33929 1.43655 2.54767C1.22818 2.75604 1.11111 3.03866 1.11111 3.33334V16.6667C1.11111 16.9614 1.22818 17.244 1.43655 17.4523C1.64493 17.6607 1.92754 17.7778 2.22223 17.7778H17.7778C18.0725 17.7778 18.3551 17.6607 18.5635 17.4523C18.7718 17.244 18.8889 16.9614 18.8889 16.6667V3.33334C18.8889 3.03866 18.7718 2.75604 18.5635 2.54767C18.3551 2.33929 18.0725 2.22223 17.7778 2.22223ZM2.22223 16.6667V3.33334H17.7778V16.6667H2.22223Z"/>
       <path d="M4.95555 7.77778C5.28518 7.77778 5.60741 7.68003 5.8815 7.49689C6.15558 7.31376 6.3692 7.05346 6.49535 6.74892C6.62149 6.44437 6.6545 6.10926 6.59019 5.78596C6.52588 5.46266 6.36715 5.16569 6.13406 4.9326C5.90097 4.69951 5.604 4.54078 5.2807 4.47647C4.9574 4.41216 4.62228 4.44516 4.31774 4.57131C4.0132 4.69746 3.7529 4.91108 3.56976 5.18516C3.38663 5.45924 3.28888 5.78147 3.28888 6.11111C3.28888 6.55314 3.46447 6.97706 3.77703 7.28962C4.0896 7.60218 4.51352 7.77778 4.95555 7.77778ZM4.95555 5.22222C5.13158 5.22112 5.30399 5.27232 5.45089 5.36932C5.5978 5.46632 5.71259 5.60476 5.78072 5.76708C5.84885 5.9294 5.86725 6.1083 5.83358 6.28109C5.79992 6.45389 5.7157 6.61279 5.59161 6.73766C5.46752 6.86253 5.30915 6.94774 5.13657 6.98249C4.96399 7.01724 4.78498 6.99997 4.62223 6.93285C4.45949 6.86574 4.32033 6.75182 4.22241 6.60552C4.12449 6.45923 4.07222 6.28715 4.07221 6.11111C4.07367 5.87729 4.1672 5.65345 4.33255 5.48811C4.49789 5.32277 4.72172 5.22923 4.95555 5.22778V5.22222Z"/>
       <path d="M12.6555 8.53889L9.65555 11.5389L7.43332 9.31666C7.32923 9.21319 7.18843 9.15511 7.04166 9.15511C6.89489 9.15511 6.75408 9.21319 6.64999 9.31666L3.28888 12.7222V14.2944L7.0611 10.5222L8.88888 12.3222L6.80555 14.4056H8.33332L13.0278 9.71111L16.6667 13.3333V11.7667L13.4389 8.53889C13.3348 8.43541 13.194 8.37733 13.0472 8.37733C12.9004 8.37733 12.7596 8.43541 12.6555 8.53889Z"/>
-    </svg>                  
+    </svg>
 `,
 });
 
@@ -355,7 +241,7 @@ const buttonTableEdit = createElement('button', {
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M15.5629 4.86078L17.6394 6.93629L15.5629 4.86078ZM16.8982 3.03233L11.2834 8.64709C10.9933 8.9368 10.7955 9.3059 10.7148 9.70789L10.1962 12.304L12.7923 11.7844C13.1942 11.704 13.5629 11.5069 13.8531 11.2167L19.4678 5.60196C19.6366 5.43324 19.7704 5.23293 19.8617 5.01248C19.953 4.79203 20 4.55576 20 4.31714C20 4.07853 19.953 3.84225 19.8617 3.6218C19.7704 3.40136 19.6366 3.20105 19.4678 3.03233C19.2991 2.8636 19.0988 2.72976 18.8784 2.63845C18.6579 2.54714 18.4216 2.50014 18.183 2.50014C17.9444 2.50014 17.7081 2.54714 17.4877 2.63845C17.2672 2.72976 17.0669 2.8636 16.8982 3.03233V3.03233Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M18.0394 14.2648V17.206C18.0394 17.726 17.8328 18.2248 17.4651 18.5925C17.0973 18.9602 16.5986 19.1668 16.0786 19.1668H5.29415C4.77411 19.1668 4.27537 18.9602 3.90765 18.5925C3.53993 18.2248 3.33334 17.726 3.33334 17.206V6.42157C3.33334 5.90154 3.53993 5.4028 3.90765 5.03508C4.27537 4.66735 4.77411 4.46077 5.29415 4.46077H8.23535" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>   
+    </svg>
   `,
 });
 
@@ -364,16 +250,14 @@ const buttonTableDel = createElement('button', {
   innerHTML: `
     <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
       <path d="M7.03125 3.59375H6.875C6.96094 3.59375 7.03125 3.52344 7.03125 3.4375V3.59375H12.9688V3.4375C12.9688 3.52344 13.0391 3.59375 13.125 3.59375H12.9688V5H14.375V3.4375C14.375 2.74805 13.8145 2.1875 13.125 2.1875H6.875C6.18555 2.1875 5.625 2.74805 5.625 3.4375V5H7.03125V3.59375ZM16.875 5H3.125C2.7793 5 2.5 5.2793 2.5 5.625V6.25C2.5 6.33594 2.57031 6.40625 2.65625 6.40625H3.83594L4.31836 16.6211C4.34961 17.2871 4.90039 17.8125 5.56641 17.8125H14.4336C15.1016 17.8125 15.6504 17.2891 15.6816 16.6211L16.1641 6.40625H17.3438C17.4297 6.40625 17.5 6.33594 17.5 6.25V5.625C17.5 5.2793 17.2207 5 16.875 5ZM14.2832 16.4062H5.7168L5.24414 6.40625H14.7559L14.2832 16.4062Z"/>
-    </svg>                  
+    </svg>
 `,
 });
 
-// Функция создания строки товара на основе объекта obj по ключам  objTitle
+// Функция заполнения таблицы
 const createRow = (obj, objTitle) => {
   const tableRow = createElement('tr', {
     className: 'table__row',
-  }, {
-    parent: tbody,
   });
 
   Object.keys(objTitle).map(item => {
@@ -403,71 +287,446 @@ const createRow = (obj, objTitle) => {
   return tableRow;
 };
 
-// Функция заполнения таблицы
-const renderGoods = (arr, objTable) => {
-  tbody.textContent = '';
-  return arr.map(item => {
-    createRow(item, objTable);
-  });
-};
+const renderGoods = (arr, objTable) => arr.map(item => createRow(item, objTable));
 
-renderGoods(goods, tableTitle);
+const bodyRows = renderGoods(goods, tableTitle);
 
-// tfoot
-const footRow = createElement('tr', {
-  className: 'footer-row',
-  innerHTML: `
-    <tr>
-      <td class="page-count" colspan="6">
-        <label>Показывать на странице:
-          <select class="page-count__list" name="page">
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-          </select>
-        </label>
-      </td>
-  `,
+createElement('div', {
+  className: 'container',
 }, {
-  parent: tfoot,
+  parent: cms,
+  appends: [
+    createElement('div', {
+      className: 'container__group',
+    }, {
+      appends: [
+        createElement('h2', {
+          className: 'title',
+          textContent: 'CMS',
+        }),
+        createElement('p', {
+          className: 'text',
+          textContent: 'Итоговая стоимость: ',
+        }, {
+          append: createElement('span', {
+            className: 'text-alt',
+            textContent: `$${allTotalPrice}`,
+          }),
+        }),
+      ],
+    }),
+    createElement('div', {
+      className: 'container__btn',
+    }, {
+      appends: [
+        createElement('button', {
+          className: 'button-filter',
+          type: 'button',
+          innerHTML: `
+            <svg class="button-filter__svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 12L20 4V0H0V4L8 12V20L12 16V12Z"/>
+            </svg>
+            <span class="button-filter__text">Фильтр</span>
+          `,
+        }),
+        createElement('form', {
+          className: 'search',
+        }, {
+          append: createElement('fieldset', {
+            className: 'search',
+          }, {
+            appends: [
+              createElement('button', {
+                className: 'search__button',
+                type: 'submit',
+                innerHTML: `
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.4097 14.8822C11.7399 16.1799 9.63851 16.7922 7.53338 16.5942C5.42824 16.3963 3.47766 15.403 2.07881 13.8166C0.679961 12.2303 -0.0619809 10.1701 0.00405863 8.05565C0.0700982 5.94118 0.939153 3.9314 2.43427 2.43552C3.92939 0.939633 5.93814 0.0701341 8.05152 0.00406071C10.1649 -0.0620127 12.224 0.680308 13.8096 2.07987C15.3951 3.47944 16.3879 5.43102 16.5857 7.53723C16.7836 9.64345 16.1717 11.7459 14.8745 13.4166L19.6936 18.2201C20.1016 18.6267 20.1022 19.2872 19.695 19.6946C19.2878 20.1021 18.6273 20.1017 18.2204 19.6939L13.4201 14.8822H13.4097ZM8.31916 14.5495C9.13773 14.5495 9.94829 14.3882 10.7045 14.0748C11.4608 13.7614 12.148 13.302 12.7268 12.7229C13.3056 12.1438 13.7647 11.4563 14.078 10.6996C14.3913 9.94298 14.5525 9.13201 14.5525 8.31302C14.5525 7.49403 14.3913 6.68306 14.078 5.92641C13.7647 5.16976 13.3056 4.48225 12.7268 3.90314C12.148 3.32402 11.4608 2.86465 10.7045 2.55123C9.94829 2.23782 9.13773 2.07651 8.31916 2.07651C6.66598 2.07651 5.08051 2.73356 3.91153 3.90314C2.74256 5.07271 2.08583 6.659 2.08583 8.31302C2.08583 9.96705 2.74256 11.5533 3.91153 12.7229C5.08051 13.8925 6.66598 14.5495 8.31916 14.5495Z"/>
+                  </svg>
+                `,
+              }),
+              createElement('input', {
+                className: 'search__input',
+                type: 'search',
+                name: 'search',
+                placeholder: 'Поиск по наименованию и категории',
+              }),
+            ],
+          }),
+        }),
+        createElement('button', {
+          className: 'button-add-product',
+          type: 'button',
+          textContent: 'Добавить товар',
+        }, {
+          cb(elem) { // открытие модального окна
+            elem.addEventListener('click', () => {
+              document.querySelector('.overlay').classList.add('overlay_active');
+            });
+          },
+        }),
+      ],
+    }),
+    createElement('div', {
+      className: 'scroll-box',
+    }, {
+      append: createElement('table', {
+        className: 'table',
+      }, {
+        appends: [
+          // Строка с заголовками таблицы
+          createElement('thead', {
+            className: 'table__title',
+          }, {
+            append: createElement('tr', {
+              className: 'table__row-title',
+            }, {
+              appends: [...thTableList],
+            }),
+          }),
+          // Тело таблицы
+          createElement('tbody', {
+            className: 'table__tbody',
+          }, {
+            appends: [...bodyRows],
+          }),
+
+          createElement('tfoot', {
+            className: 'table__tfoot',
+          }, {
+            append: createElement('tr', {
+              className: 'footer-row',
+            }, {
+              appends: [
+                createElement('td', {
+                  className: 'page-count',
+                  colSpan: 6,
+                }, {
+                  append: createElement('label', {
+                    textContent: 'Показывать на странице:',
+                  }, {
+                    append: createElement('select', {
+                      className: 'page-count__list',
+                      name: 'page',
+                    }, {
+                      appends: [
+                        createElement('option', {
+                          value: 10,
+                          textContent: 10,
+                        }),
+                        createElement('option', {
+                          value: 20,
+                          textContent: 20,
+                        }),
+                        createElement('option', {
+                          value: 30,
+                          textContent: 30,
+                        }),
+                      ],
+                    }),
+                  }),
+                }),
+                createElement('td', {
+                  className: 'page-all',
+                  innerHTML: `
+                    <p><span>1</span>-<span>10</span> of <span>${goods.length}</span></p>
+                  `,
+                }),
+                createElement('td', {
+                  className: 'page-control',
+                }, {
+                  appends: [
+                    createElement('button', {
+                      className: 'button btn-back',
+                      type: 'button',
+                      innerHTML: `
+                        <svg width="6" height="10" viewBox="0 0 6 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M5.79971 1.10636C6.42812 0.51287 5.43313 -0.426818 4.80472 0.216126L0.196378 4.51891C-0.0654595 4.7662 -0.0654595 5.21131 0.196378 5.4586L4.80472 9.81084C5.43313 10.4043 6.42812 9.46464 5.79971 8.87115L1.71504 5.01348L5.79971 1.10636Z"/>
+                        </svg>
+                      `,
+                    }),
+                    createElement('button', {
+                      className: 'button btn-next',
+                      type: 'button',
+                      innerHTML: `
+                        <svg width="6" height="10" viewBox="0 0 6 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M0.200293 1.10636C-0.428118 0.51287 0.566865 -0.426818 1.19528 0.216126L5.80362 4.51891C6.06546 4.7662 6.06546 5.21131 5.80362 5.4586L1.19528 9.81084C0.566865 10.4043 -0.428118 9.46464 0.200293 8.87115L4.28496 5.01348L0.200293 1.10636Z"/>
+                        </svg>
+                    `,
+                    }),
+                  ],
+                }),
+              ],
+            }),
+          }),
+        ],
+      }),
+    }),
+  ],
 });
 
-createElement('td', {
-  className: 'page-all',
-  innerHTML: `
-    <p><span>1</span>-<span>10</span> of <span>${goods.length}</span></p>
-  `,
-}, {
-  parent: footRow,
-});
 
-const tdPageControl = createElement('td', {
-  className: 'page-control',
+createElement('div', {
+  className: 'overlay',
 }, {
-  parent: footRow,
-});
-
-const btnBack = createElement('button', {
-  className: 'button btn-back',
-  type: 'button',
-  innerHTML: `
-    <svg width="6" height="10" viewBox="0 0 6 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      <path d="M5.79971 1.10636C6.42812 0.51287 5.43313 -0.426818 4.80472 0.216126L0.196378 4.51891C-0.0654595 4.7662 -0.0654595 5.21131 0.196378 5.4586L4.80472 9.81084C5.43313 10.4043 6.42812 9.46464 5.79971 8.87115L1.71504 5.01348L5.79971 1.10636Z"/>
-    </svg>                  
-  `,
-}, {
-  parent: tdPageControl,
-});
-
-const btnNext = createElement('button', {
-  className: 'button btn-next',
-  type: 'button',
-  innerHTML: `
-    <svg width="6" height="10" viewBox="0 0 6 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0.200293 1.10636C-0.428118 0.51287 0.566865 -0.426818 1.19528 0.216126L5.80362 4.51891C6.06546 4.7662 6.06546 5.21131 5.80362 5.4586L1.19528 9.81084C0.566865 10.4043 -0.428118 9.46464 0.200293 8.87115L4.28496 5.01348L0.200293 1.10636Z"/>
-    </svg>
-`,
-}, {
-  parent: tdPageControl,
+  parent: cms,
+  append: createElement('div', {
+    className: 'modal',
+  }, {
+    append: createElement('div', {
+      className: 'modal__container',
+    }, {
+      appends: [
+        createElement('div', {
+          className: 'modal__group',
+        }, {
+          appends: [
+            createElement('h2', {
+              className: 'modal__title',
+              textContent: 'Добавить ТОВАР',
+            }),
+            createElement('p', {
+              className: 'modal__text',
+              textContent: 'ID:',
+            }, {
+              append: createElement('span', {
+                className: 'modal__id',
+                textContent: 201910241,
+              }),
+            }),
+            createElement('button', {
+              className: 'button modal__button',
+              type: 'button',
+              innerHTML: `
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15.5629 4.86078L17.6394 6.93629L15.5629 4.86078ZM16.8982 3.03233L11.2834 8.64709C10.9933 8.9368 10.7955 9.3059 10.7148 9.70789L10.1962 12.304L12.7923 11.7844C13.1942 11.704 13.5629 11.5069 13.8531 11.2167L19.4678 5.60196C19.6366 5.43324 19.7704 5.23293 19.8617 5.01248C19.953 4.79203 20 4.55576 20 4.31714C20 4.07853 19.953 3.84225 19.8617 3.6218C19.7704 3.40136 19.6366 3.20105 19.4678 3.03233C19.2991 2.8636 19.0988 2.72976 18.8784 2.63845C18.6579 2.54714 18.4216 2.50014 18.183 2.50014C17.9444 2.50014 17.7081 2.54714 17.4877 2.63845C17.2672 2.72976 17.0669 2.8636 16.8982 3.03233V3.03233Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M18.0394 14.2648V17.206C18.0394 17.726 17.8328 18.2248 17.4651 18.5925C17.0973 18.9602 16.5986 19.1668 16.0786 19.1668H5.29415C4.77411 19.1668 4.27537 18.9602 3.90765 18.5925C3.53993 18.2248 3.33334 17.726 3.33334 17.206V6.42157C3.33334 5.90154 3.53993 5.4028 3.90765 5.03508C4.27537 4.66735 4.77411 4.46077 5.29415 4.46077H8.23535" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              `,
+            }),
+          ],
+        }),
+        createElement('button', {
+          className: 'modal__close',
+          type: 'button',
+          ariaLabel: 'Закрыть',
+          innerHTML: `
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 2L22 22" stroke="#currentColor" stroke-width="3" stroke-linecap="round"/>
+            <path d="M2 22L22 2" stroke="#currentColor" stroke-width="3" stroke-linecap="round"/>
+          </svg> 
+          `,
+        }),
+        createElement('form', {
+          className: 'modal__form',
+          action: 'https://jsonplaceholder.typicode.com/post',
+          method: 'post',
+        }, {
+          appends: [
+            createElement('fieldset', {
+              className: 'form__group',
+            }, {
+              appends: [
+                createElement('div', {
+                  className: 'group group_name',
+                }, {
+                  appends: [
+                    createElement('label', {
+                      className: 'form__label',
+                      for: 'name',
+                      textContent: 'Наименование',
+                    }),
+                    createElement('input', {
+                      className: 'form__input',
+                      type: 'text',
+                      name: 'name',
+                      id: 'name',
+                      required: 'required',
+                    }),
+                    // div group_name
+                  ],
+                }),
+                createElement('div', {
+                  className: 'group group_category',
+                }, {
+                  appends: [
+                    createElement('label', {
+                      className: 'form__label',
+                      for: 'category',
+                      textContent: 'Категория',
+                    }),
+                    createElement('input', {
+                      className: 'form__input',
+                      type: 'text',
+                      name: 'category',
+                      id: 'category',
+                      required: 'required',
+                    }),
+                    // div group_category
+                  ],
+                }),
+                createElement('div', {
+                  className: 'group group_units',
+                }, {
+                  appends: [
+                    createElement('label', {
+                      className: 'form__label',
+                      for: 'units',
+                      textContent: 'Единицы измерения',
+                    }),
+                    createElement('input', {
+                      className: 'form__input',
+                      type: 'text',
+                      name: 'units',
+                      id: 'units',
+                      required: 'required',
+                    }),
+                    // div group_units
+                  ],
+                }),
+                createElement('div', {
+                  className: 'group group_discount',
+                }, {
+                  appends: [
+                    createElement('label', {
+                      className: 'form__label',
+                      for: 'discount',
+                      textContent: 'Дисконт',
+                    }),
+                    createElement('div', {
+                      className: 'group-container',
+                    }, {
+                      appends: [
+                        createElement('input', {
+                          className: 'form__checkbox',
+                          type: 'checkbox',
+                          arialabel: 'Добавить скидку',
+                        }),
+                        createElement('input', {
+                          className: 'form__input',
+                          type: 'text',
+                          name: 'discount',
+                          id: 'discount',
+                          disabled: 'disabled',
+                          required: 'required',
+                        }),
+                      ],
+                    }),
+                    // div group_units
+                  ],
+                }),
+                createElement('div', {
+                  className: 'group group_description',
+                }, {
+                  appends: [
+                    createElement('label', {
+                      className: 'form__label',
+                      for: 'description',
+                      textContent: 'Описание',
+                    }),
+                    createElement('textarea', {
+                      className: 'form__input',
+                      name: 'description',
+                      id: 'description',
+                      cols: 30,
+                      rows: 5,
+                      required: 'required',
+                    }),
+                    // div group_description
+                  ],
+                }),
+                createElement('div', {
+                  className: 'group group_count',
+                }, {
+                  appends: [
+                    createElement('label', {
+                      className: 'form__label',
+                      for: 'count',
+                      textContent: 'Количество',
+                    }),
+                    createElement('input', {
+                      className: 'form__input',
+                      type: 'text',
+                      name: 'count',
+                      id: 'count',
+                      required: 'required',
+                    }),
+                    // div group_count
+                  ],
+                }),
+                createElement('div', {
+                  className: 'group group_price',
+                }, {
+                  appends: [
+                    createElement('label', {
+                      className: 'form__label',
+                      for: 'price',
+                      textContent: 'Цена',
+                    }),
+                    createElement('input', {
+                      className: 'form__input',
+                      type: 'text',
+                      name: 'price',
+                      id: 'price',
+                      required: 'required',
+                    }),
+                    // div group_price
+                  ],
+                }),
+                createElement('div', {
+                  className: 'group group_add-img',
+                }, {
+                  appends: [
+                    createElement('label', {
+                      className: 'form__label-img',
+                      for: 'add-img',
+                      textContent: 'Количество',
+                    }),
+                    createElement('input', {
+                      className: 'visually-hidden',
+                      type: 'file',
+                      id: 'add-img',
+                      required: 'required',
+                    }),
+                    // div group_add-img
+                  ],
+                }),
+                // fieldset - 1
+              ],
+            }),
+            createElement('fieldset', {
+              className: 'form__group-2',
+            }, {
+              appends: [
+                createElement('p', {
+                  className: 'form__text',
+                  textContent: 'Итоговая стоимость: ',
+                }, {
+                  append: createElement('span', {
+                    className: 'form__text-price',
+                    textContent: `$ 900.00`,
+                  }),
+                }),
+                createElement('button', {
+                  className: 'button-add-product',
+                  type: 'submit',
+                  formTarget: '_blank',
+                  textContent: 'Добавить товар',
+                }),
+              ],
+            }),
+            // form
+          ],
+        }),
+      ],
+    }),
+  }),
+  cb(elem) { // закртыие модального окна
+    elem.addEventListener('click', (e) => {
+      const target = e.target;
+      if (elem === target || target.closest('.modal__close')) {
+        document.querySelector('.overlay').classList.remove('overlay_active');
+      }
+    });
+  },
 });
