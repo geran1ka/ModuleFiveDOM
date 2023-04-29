@@ -211,6 +211,7 @@ const cms = document.querySelector('.cms');
 const createRow = (obj, objTitle) => {
   const tableRow = createElement('tr', {
     className: 'table__row',
+    id: obj.id,
   });
 
   Object.keys(objTitle).map(item => {
@@ -381,6 +382,18 @@ createElement('div', {
             className: 'table__tbody',
           }, {
             appends: [...renderGoods(goods, tableTitle)],
+            cb(elem) {
+              elem.addEventListener('click', (e) => {
+                const target = e.target;
+
+                if (target.closest('.button-table__del')) {
+                  goods.splice(goods.findIndex(item =>
+                    item.id === target.closest('.table__row').getAttribute('id')), 1);
+                  target.closest('.table__row').remove();
+                  console.log('goods: ', goods);
+                }
+              });
+            },
           }),
 
           createElement('tfoot', {
@@ -721,3 +734,13 @@ createElement('div', {
     });
   },
 });
+/*
+tableBody.addEventListener('click', (e) => {
+  const target = e.target;
+  if (target.closest('.button-table_del')) {
+    goods.splice(goods.findIndex(item => item.id === target.closest('.table__row').getAttribute('id')), 1);
+    target.closest('.table__row').remove();
+    console.log('goods: ', goods);
+  }
+});
+*/
