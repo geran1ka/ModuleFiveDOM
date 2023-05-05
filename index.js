@@ -138,3 +138,13 @@ overlay.addEventListener('click', e => {
   }
 });
 
+tableBody.addEventListener('click', (e) => {
+  const target = e.target;
+  if (target.closest('.button-table_del')) {
+    goods.splice(goods.findIndex(item => item.id === target.closest('.table__row').getAttribute('id')), 1);
+    target.closest('.table__row').remove();
+    console.log('goods: ', goods);
+  }
+});
+
+
