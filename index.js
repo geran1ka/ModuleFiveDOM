@@ -128,7 +128,6 @@ const overlay = document.querySelector('.overlay');
 
 
 btnAddProduct.addEventListener('click', () => {
-  console.log('click');
   overlay.classList.add('overlay_active');
 });
 
