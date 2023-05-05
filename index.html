@@ -120,11 +120,11 @@
         </button>
 
 
-          <form class="modal__form form" action="https://jsonplaceholder.typicode.com/posts" method="post">
+          <form class="modal__form form" name="formAddProduct" action="https://jsonplaceholder.typicode.com/posts" method="post">
             <fieldset class="form__group">
               <div class="group group_name">
-                <label class="form__label" for="name">Наименование</label>
-                <input class="form__input" type="text" name="name" id="name" required>
+                <label class="form__label" for="title">Наименование</label>
+                <input class="form__input" type="text" name="title" id="title" required>
               </div>
 
               <div class="group group_category">
@@ -140,8 +140,8 @@
               <div class="group group_discount">
                 <label class="form__label" for="discount">Дисконт </label>
                 <div class="group-container">
-                  <input class="form__checkbox" type="checkbox" aria-label="Добавить скидку">
-                  <input class="form__input" type="text" name="discount" id="discount" disabled required>
+                  <input class="form__checkbox" type="checkbox" name="discont" aria-label="Добавить скидку">
+                  <input class="form__input " type="text" name="discount" id="discount" disabled required>
                 </div>  
               </div>
 
@@ -161,8 +161,8 @@
               </div>
               
               <div  class="group group_add-img">
-                <label class="form__label-img" for="add-img">Добавить изображение</label>
-                <input  class="visually-hidden" type="file" id="add-img">  
+                <label class="form__label-img" for="images">Добавить изображение</label>
+                <input  class="visually-hidden" type="file" id="images">  
               </div>
             </fieldset>
             <fieldset class="form__group-2">

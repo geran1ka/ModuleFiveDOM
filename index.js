@@ -119,6 +119,7 @@ const createRow = ({id, title, category, units, count, price, images}) => {
   return row;
 };
 
+const randomID = () => Math.round(Math.random() * 999999999);
 
 const renderGoods = (array) => array.map(item => tableBody.append(createRow(item)));
 renderGoods(goods);
@@ -129,6 +130,7 @@ const overlay = document.querySelector('.overlay');
 
 btnAddProduct.addEventListener('click', () => {
   overlay.classList.add('overlay_active');
+  document.querySelector('.modal__id').textContent = randomID();
 });
 
 overlay.addEventListener('click', e => {
@@ -147,4 +149,29 @@ tableBody.addEventListener('click', (e) => {
   }
 });
 
+const form = document.querySelector('.modal__form');
 
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+
+ 
+  const product = Object.fromEntries(formData.entries());
+
+  goods.push(product);
+  renderGoods(goods);
+});
+
+/*
+const form = document.forms.formAddProduct;
+*/
+form.addEventListener('click', () => {
+  if (form.discont.checked) {
+    form.discount.disabled = false;
+  } else {
+    form.discount.disabled = true;
+    form.discount.value = '';
+  };
+
+});
