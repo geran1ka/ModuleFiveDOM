@@ -73,6 +73,15 @@ const goods = [
   },
 ];
 
+const totalPriceAllProduct = (arr) => arr.reduce((acc, item) => acc + item.count * item.price, 0);
+
+const getTotalPricePage = () => {
+  const totalPricePage = document.querySelector('.text-price__all');
+  console.log('totalPriceAllProduct(goods): ', totalPriceAllProduct(goods));
+  return totalPricePage.textContent = '$' + totalPriceAllProduct(goods);
+};
+getTotalPricePage();
+
 const table = document.querySelector('.table');
 const tableBody = table.querySelector('.table__body');
 
@@ -119,59 +128,96 @@ const createRow = ({id, title, category, units, count, price, images}) => {
   return row;
 };
 
-const randomID = () => Math.round(Math.random() * 999999999);
+const randomID = () => Math.round(Math.random() * 299999999 + 200000000);
 
 const renderGoods = (array) => array.map(item => tableBody.append(createRow(item)));
 renderGoods(goods);
 
 const btnAddProduct = document.querySelector('.button-add-product');
 const overlay = document.querySelector('.overlay');
+const form = document.querySelector('.modal__form');
 
+
+const openModal = () => {
+  overlay.classList.add('overlay_active');
+};
+
+const closeModal = () => {
+  overlay.classList.remove('overlay_active');
+};
+
+const addProductGoods = product => {
+  goods.push(product);
+  console.log('goods: ', goods);
+};
+
+const addProductPage = (product, tableBody) => {
+  tableBody.append(createRow(product));
+};
 
 btnAddProduct.addEventListener('click', () => {
-  overlay.classList.add('overlay_active');
-  document.querySelector('.modal__id').textContent = randomID();
+  openModal();
+  const id = randomID();
+  document.querySelector('.modal__id').textContent = id;
 });
 
 overlay.addEventListener('click', e => {
   const target = e.target;
   if (target === overlay || target.closest('.modal__close')) {
-    overlay.classList.remove('overlay_active');
+    closeModal();
+    form.reset();
   }
 });
 
 tableBody.addEventListener('click', (e) => {
   const target = e.target;
   if (target.closest('.button-table_del')) {
-    goods.splice(goods.findIndex(item => item.id === target.closest('.table__row').getAttribute('id')), 1);
+    goods.splice(goods.findIndex(item => item.id === +target.closest('.table__row').getAttribute('id')), 1);
     target.closest('.table__row').remove();
-    console.log('goods: ', goods);
+    getTotalPricePage();
+    console.log('getTotalPricePage(): ', getTotalPricePage());
   }
 });
-
-const form = document.querySelector('.modal__form');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
   const formData = new FormData(e.target);
+  const id = document.querySelector('.modal__id').textContent;
+  const newProduct = Object.fromEntries(formData);
+  newProduct.id = id;
+  // проверка на наличие картинки
+  if (!formData.get('images').name) {
+    newProduct.images = {};
+  } else {
+    newProduct.images = {};
+    newProduct.images.small = 'img/' + formData.get('images').name;
+    newProduct.images.big = 'img/' + formData.get('images').name;
+  }
 
- 
-  const product = Object.fromEntries(formData.entries());
-
-  goods.push(product);
-  renderGoods(goods);
+  addProductGoods(newProduct);
+  addProductPage(newProduct, tableBody);
+  getTotalPricePage();
+  form.reset();
+  closeModal();
 });
 
-/*
-const form = document.forms.formAddProduct;
-*/
-form.addEventListener('click', () => {
-  if (form.discont.checked) {
-    form.discount.disabled = false;
+form.addEventListener('change', () => {
+  const totalPriceProduct = document.querySelector('.form__text-price');
+  if (form.discont.value) {
+    console.log('1');
+    totalPriceProduct.textContent = '$ ' + (form.price.value * form.count.value -
+      form.price.value * form.count.value * form.discont.value / 100);
   } else {
-    form.discount.disabled = true;
-    form.discount.value = '';
-  };
+    totalPriceProduct.textContent = '$ ' + form.price.value * form.count.value;
+  }
+});
 
+form.addEventListener('click', () => {
+  if (form.checkbox.checked) {
+    form.discont.disabled = false;
+  } else {
+    form.discont.disabled = true;
+    form.discont.value = '';
+  }
 });

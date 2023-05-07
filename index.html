@@ -19,7 +19,7 @@
 
       <div class="container__group">
         <h2 class="title">CMS</h2>
-        <p class="text">Итоговая стоимость: <span class="text-alt">$900.00</span></p>
+        <p class="text-price">Итоговая стоимость: <span class="text-price__all">$0.00</span></p>
       </div>
       <div class="container__btn">
         <button class="button button-filter" type="button">
@@ -57,7 +57,7 @@
           </thead>
 
           <tbody  class="table__body">
-           
+
           </tbody>
 
           <tfoot>
@@ -138,10 +138,10 @@
               </div>
   
               <div class="group group_discount">
-                <label class="form__label" for="discount">Дисконт </label>
+                <label class="form__label" for="discont">Дисконт </label>
                 <div class="group-container">
-                  <input class="form__checkbox" type="checkbox" name="discont" aria-label="Добавить скидку">
-                  <input class="form__input " type="text" name="discount" id="discount" disabled required>
+                  <input class="form__checkbox" type="checkbox" name="checkbox" aria-label="Добавить скидку">
+                  <input class="form__input " type="number" name="discont" id="discont" disabled required>
                 </div>  
               </div>
 
@@ -162,11 +162,11 @@
               
               <div  class="group group_add-img">
                 <label class="form__label-img" for="images">Добавить изображение</label>
-                <input  class="visually-hidden" type="file" id="images">  
+                <input  class="visually-hidden" type="file" name="images" id="images" accept="image/*" multiple>  
               </div>
             </fieldset>
             <fieldset class="form__group-2">
-              <p class="form__text">Итоговая стоимость: <span class="form__text-price">$ 900.00</span></p>
+              <p class="form__text">Итоговая стоимость: <span class="form__text-price">$ 0.00</span></p>
               <button class="button-add-product" type="submit" formtarget="_blank">Добавить товар</button>  
             </fieldset>
           </form>
