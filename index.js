@@ -73,19 +73,20 @@ const goods = [
   },
 ];
 
-const totalPriceAllProduct = (arr) => arr.reduce((acc, item) => acc + item.count * item.price, 0);
+const totalPriceAllProduct = (arr) => arr.reduce((acc, item) =>
+  acc + (item.count * item.price - item.count * item.price * item.discont / 100), 0);
 
 const getTotalPricePage = () => {
   const totalPricePage = document.querySelector('.text-price__all');
-  console.log('totalPriceAllProduct(goods): ', totalPriceAllProduct(goods));
-  return totalPricePage.textContent = '$' + totalPriceAllProduct(goods);
+
+  return totalPricePage.textContent = '$' + Math.round(totalPriceAllProduct(goods));
 };
 getTotalPricePage();
 
 const table = document.querySelector('.table');
 const tableBody = table.querySelector('.table__body');
 
-const createRow = ({id, title, category, units, count, price, images}) => {
+const createRow = ({id, title, category, units, count, price, discont, images}) => {
   const row = document.createElement('tr');
   row.classList = 'table__row';
   row.id = id;
@@ -97,7 +98,9 @@ const createRow = ({id, title, category, units, count, price, images}) => {
     <td class="table__cell table__cell-units">${units}</td>
     <td class="table__cell table__cell-count">${count}</td>
     <td class="table__cell table__cell-price">$${price}</td>
-    <td class="table__cell table__cell-total">$${count * price}</td>
+    <td class="table__cell table__cell-total">$
+      ${!discont ? Math.round(count * price) : Math.round(count * price - count * price * discont / 100)}
+    </td>
     <td class="table__cell table__cell-btn">
       <button class="button button-table button-table_image" type="button"> 
         ${Object.keys(images)?.length ?
@@ -136,7 +139,7 @@ renderGoods(goods);
 const btnAddProduct = document.querySelector('.button-add-product');
 const overlay = document.querySelector('.overlay');
 const form = document.querySelector('.modal__form');
-
+const totalPriceProduct = document.querySelector('.form__text-price');
 
 const openModal = () => {
   overlay.classList.add('overlay_active');
@@ -166,6 +169,7 @@ overlay.addEventListener('click', e => {
   if (target === overlay || target.closest('.modal__close')) {
     closeModal();
     form.reset();
+    totalPriceProduct.textContent = '$ 0.00';
   }
 });
 
@@ -175,7 +179,6 @@ tableBody.addEventListener('click', (e) => {
     goods.splice(goods.findIndex(item => item.id === +target.closest('.table__row').getAttribute('id')), 1);
     target.closest('.table__row').remove();
     getTotalPricePage();
-    console.log('getTotalPricePage(): ', getTotalPricePage());
   }
 });
 
@@ -203,13 +206,12 @@ form.addEventListener('submit', (e) => {
 });
 
 form.addEventListener('change', () => {
-  const totalPriceProduct = document.querySelector('.form__text-price');
   if (form.discont.value) {
-    console.log('1');
-    totalPriceProduct.textContent = '$ ' + (form.price.value * form.count.value -
-      form.price.value * form.count.value * form.discont.value / 100);
+    form.discont.value < 100 ? totalPriceProduct.textContent = '$ ' + Math.round(form.price.value * form.count.value -
+        form.price.value * form.count.value * form.discont.value / 100) :
+        totalPriceProduct.textContent = '$ 0.00';
   } else {
-    totalPriceProduct.textContent = '$ ' + form.price.value * form.count.value;
+    totalPriceProduct.textContent = '$ ' + Math.round(form.price.value * form.count.value);
   }
 });
 

@@ -192,16 +192,12 @@
   background-color: #f2f4ff;
   border: 1px solid var(--second-bg-color, #f4f2ff);
   outline: none;
-  cursor: pointer;
+
 }
 
-.form__input:hover {
+.form__input:hover:not(:disabled) {
   border-color: var(--persian-blue, #4636c3);
-}
-
-#discount:disabled:hover {
-  border-color: #f4f2ff;
-  cursor: default;
+  cursor: pointer;
 }
 
 .group-container {
