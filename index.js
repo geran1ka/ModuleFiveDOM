@@ -168,8 +168,8 @@ overlay.addEventListener('click', e => {
   const target = e.target;
   if (target === overlay || target.closest('.modal__close')) {
     closeModal();
-    form.reset();
-    totalPriceProduct.textContent = '$ 0.00';
+    //form.reset();
+    //totalPriceProduct.textContent = '$ 0.00';
   }
 });
 
@@ -202,6 +202,7 @@ form.addEventListener('submit', (e) => {
   addProductPage(newProduct, tableBody);
   getTotalPricePage();
   form.reset();
+  totalPriceProduct.textContent = '$ 0.00';
   closeModal();
 });
 
