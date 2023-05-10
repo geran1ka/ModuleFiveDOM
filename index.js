@@ -162,6 +162,10 @@ btnAddProduct.addEventListener('click', () => {
   openModal();
   const id = randomID();
   document.querySelector('.modal__id').textContent = id;
+  if (!form.checkbox.checked) {
+    form.discont.disabled = true;
+    form.discont.value = '';
+  }
 });
 
 overlay.addEventListener('click', e => {
@@ -216,11 +220,14 @@ form.addEventListener('change', () => {
   }
 });
 
-form.addEventListener('click', () => {
-  if (form.checkbox.checked) {
-    form.discont.disabled = false;
-  } else {
-    form.discont.disabled = true;
-    form.discont.value = '';
+form.addEventListener('click', (e) => {
+  if (e.target.name === 'checkbox') {
+    if (form.checkbox.checked) {
+      form.discont.disabled = false;
+      form.discont.focus();
+    } else {
+      form.discont.disabled = true;
+      form.discont.value = '';
+    }
   }
 });

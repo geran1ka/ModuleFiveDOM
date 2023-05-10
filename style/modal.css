@@ -195,6 +195,7 @@
 
 }
 
+.form__input:focus:not(:disabled),
 .form__input:hover:not(:disabled) {
   border-color: var(--persian-blue, #4636c3);
   cursor: pointer;
