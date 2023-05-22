@@ -102,8 +102,25 @@ const formControl = (data, closeModal) => {
   });
 };
 
+const imageControl = () => {
+  tableBody.addEventListener('click', (e) => {
+    const target = e.target;
+    if (target.closest('.button-table_image')) {
+      const url = target.closest('.button-table_image').dataset.pic;
+      const width = 600;
+      const height = 600;
+      const top = (screen.height - height) / 2;
+      const left = (screen.width - width) / 2;
+      if (url !== 'false') {
+        open(url, '', `width=${width},height=${height},top=${top},left=${left}`);
+      }
+    }
+  });
+};
+
 export {
   modalControl,
   deleteControl,
   formControl,
+  imageControl,
 };

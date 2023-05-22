@@ -1,6 +1,6 @@
 import {getTotalPricePage} from './script/function/totalPriceAllProduct.js';
 import {renderGoods} from './script/module/renderElement.js';
-import {modalControl, formControl, deleteControl} from './script/module/control.js';
+import {modalControl, formControl, deleteControl, imageControl} from './script/module/control.js';
 
 const goods = [
   {
@@ -19,7 +19,7 @@ const goods = [
     'units': 'шт',
     'images': {
       'small': 'img/smrtxiaomi11t-m.jpg',
-      'big': 'img/smrtxiaomi11t-b.jpg',
+      'big': 'https://static.mvideo.ru/media/Promotions/Promo_Page/2021/December/obzor-xiaomi-11t-i-xiaomi-11t-pro/obzor-xiaomi-11t-i-xiaomi-11t-pro-img-product1.png',
     },
   },
   {
@@ -34,7 +34,7 @@ const goods = [
     'units': 'шт',
     'images': {
       'small': 'img/cheetancar-m.jpg',
-      'big': 'img/cheetancar-b.jpg',
+      'big': 'https://kaypu.com/photo/51fb3c6dcb1de0ff0602d646.jpg',
     },
   },
   {
@@ -70,7 +70,7 @@ const goods = [
     'units': 'v',
     'images': {
       'small': 'img/lan_proconnect43-3-25.jpg',
-      'big': 'img/lan_proconnect43-3-25-b.jpg',
+      'big': 'https://img.mvideo.ru/Pdb/4162956b.jpg',
     },
   },
 ];
@@ -81,6 +81,7 @@ const init = () => {
   const {closeModal} = modalControl();
   formControl(goods, closeModal);
   deleteControl(goods);
+  imageControl();
 };
 
 init();
