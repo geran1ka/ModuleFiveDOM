@@ -1,6 +1,24 @@
-@import url("style/var.css");
-@import url("style/normalize.css");
-@import url("style/global.css");
-@import url("style/overlay.css");
-@import url("style/modal.css");
-@import url("style/smc.css");
+.body {
+  padding: 100px 0;
+  min-width: 320px;
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 500px;
+  padding: 0 100px;
+  margin: 0 auto;
+}
+
+.input {
+  padding: 10px;
+  font-size: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.text {
+  padding: 10px;
+  font-size: 20px;
+  border-bottom: 2px solid black;
+}
