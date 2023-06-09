@@ -21,8 +21,8 @@ const modalControl = () => {
   };
   btnAddProduct.addEventListener('click', () => {
     openModal();
-    const id = randomID();
-    document.querySelector('.modal__id').textContent = id;
+    //const id = randomID();
+    //document.querySelector('.modal__id').style = `display: none`;
     if (!form.checkbox.checked) {
       form.discont.disabled = true;
       form.discont.value = '';
