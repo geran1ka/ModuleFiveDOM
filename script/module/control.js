@@ -24,8 +24,8 @@ const modalControl = () => {
   btnAddProduct.addEventListener('click', () => {
     openModal();
     if (!form.checkbox.checked) {
-      form.discont.disabled = true;
-      form.discont.value = '';
+      form.discount.disabled = true;
+      form.discount.value = '';
     }
   });
 
@@ -56,10 +56,9 @@ const deleteControl = (data) => {
   });
 };
 
-const renderModalEror = (err, data) => {
+const renderModalEror = (err, response, data) => {
   if (err) {
-    const errorElem = renderEror(err);
-    console.log('errorElem: ', errorElem);
+    const errorElem = renderEror(err, response);
     overlay.append(errorElem);
     return;
   }
@@ -90,9 +89,6 @@ const formControl = (closeModal) => {
       callback: renderModalEror,
       body: newProduct,
     });
-
-    form.reset();
-    totalPriceProduct.textContent = '$ 0.00';
   });
 
 

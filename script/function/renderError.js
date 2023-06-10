@@ -18,8 +18,7 @@ export const renderEror = (err, response) => createElement('div', {
     }),
     createElement('h3', {
       className: 'error__title',
-      textContent: `Что-то пошло не так...
-        ${err}:${JSON.parse(response).message}`,
+      textContent: `${err} : ${response ? JSON.parse(response)?.message : 'Что-то пошло не так...'}`,
     }),
     createElement('button', {
       className: 'error__close close',

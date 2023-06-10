@@ -4,7 +4,8 @@ import {getTotalPricePage} from '../function/totalPriceAllProduct.js';
 import {createRow} from './createElement.js';
 
 
-export const renderGoods = (err, response = {}, array) => {
+export const renderGoods = (err, response, array) => {
+  console.log('response: ', response);
   console.log('array: ', array);
   console.log('err: ', err);
   if (err) {
