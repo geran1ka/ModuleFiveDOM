@@ -22,6 +22,7 @@ export const httpRequest = (url,
       }
 
       const data = JSON.parse(xhr.response);
+      console.log('data: ', data);
       if (callback) callback(null, data);
     });
 

@@ -251,11 +251,12 @@
 }
 
 .table__cell-btn {
+  padding: 0 8px 0 15px;
+  min-height: 69px;
   width: 124px;
-  padding-left: 8px;
-  padding-right: 15px;
   display: flex;
   gap: 20px;
+  align-items: center;
 }
 
 .table__row:hover .table__cell {

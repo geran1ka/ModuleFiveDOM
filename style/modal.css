@@ -42,8 +42,7 @@
     height: 100%;
 }
 
-.error__span-one,
-.error__span-two {
+.error__span {
   width: 100%;
     height: 3px;
     background-color: #D80101;
@@ -64,7 +63,8 @@
   padding: 0 106px;
 }
 
-.modal__close {
+.modal__close, 
+.error__close {
   position: absolute;
   width: 20px;
   height: 20px;
@@ -78,12 +78,14 @@
   stroke .3s ease-in-out;
 }
 
-.modal__close:hover {
+.modal__close:hover, 
+.error__close:hover {
   transform: scale(1.3);
   stroke: var(--violet, #6d5bd0);
 }
 
-.modal__close:active {
+.modal__close:active, 
+.error__close:active {
   stroke: var(--persian-blue, #4636c3);
 }
 

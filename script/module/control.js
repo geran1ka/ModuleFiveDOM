@@ -10,7 +10,8 @@ import {
   totalPriceProduct,
   URL,
 } from '../const.js';
-import {httpRequest} from '../httpRequest.js';
+import {httpRequest} from '../function/httpRequest.js';
+import {createElement} from '../function/functionCreateElem.js';
 
 
 const modalControl = () => {
@@ -21,6 +22,7 @@ const modalControl = () => {
   const closeModal = () => {
     overlay.classList.remove('overlay_active');
   };
+
   btnAddProduct.addEventListener('click', () => {
     openModal();
     // const id = randomID();
@@ -62,37 +64,48 @@ const deleteControl = (data) => {
 
 const renderModalEror = (err, data) => {
   if (err) {
-    const modal = overlay.querySelector('.modal');
-    const errorModal = document.createElement('div');
-    errorModal.classList.add('modal__error');
-
-    const btnErrorClose = document.createElement('button');
-    btnErrorClose.classList.add('modal__close');
-    btnErrorClose.insertAdjacentHTML('afterbegin', `
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      <path d="M2 2L22 22" stroke="#currentColor" stroke-width="3" stroke-linecap="round"/>
-      <path d="M2 22L22 2" stroke="#currentColor" stroke-width="3" stroke-linecap="round"/>
-    </svg>  
-    `);
-
-    const errorWrapper = document.createElement('div');
-    errorWrapper.classList.add('error__wrapper');
-
-    const spanOne = document.createElement('div');
-    spanOne.classList.add('error__span-one');
-    const spanTwo = document.createElement('div');
-    spanTwo.classList.add('error__span-two');
-
-    errorWrapper.append(spanOne, spanTwo);
-
-    const errorTitle = document.createElement('h2');
-    errorTitle.classList.add('erorr__title');
-    errorTitle.textContent = 'Что-то пошло не так';
-    errorModal.append(errorWrapper, errorTitle, btnErrorClose);
-    modal.append(errorModal);
+    createElement('div', {
+      className: 'modal__error error',
+    }, {
+      parent: overlay,
+      appends: [
+        createElement('div', {
+          className: 'error__wrapper',
+        }, {
+          appends: [
+            createElement('div', {
+              className: 'error__span-one error__span',
+            }),
+            createElement('div', {
+              className: 'error__span-two error__span',
+            }),
+          ],
+        }),
+        createElement('h3', {
+          className: 'error__title',
+          textContent: 'Что-то пошло не так',
+        }),
+        createElement('button', {
+          className: 'error__close close',
+          innerHTML: `
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 2L22 22" stroke="#currentColor" stroke-width="3" stroke-linecap="round"/>
+              <path d="M2 22L22 2" stroke="#currentColor" stroke-width="3" stroke-linecap="round"/>
+            </svg> 
+          `,
+        }),
+      ],
+      cb(elem) {
+        elem.addEventListener('click', (e) => {
+          const target = e.target;
+          if (elem === target || target.closest('.error__close')) {
+            elem.remove();
+          }
+        });
+      },
+    });
     return;
   }
-  console.log('data', data);
   form.reset();
   totalPriceProduct.textContent = '$ 0.00';
   closeModal();
@@ -108,33 +121,21 @@ const formControl = (closeModal) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    console.log('formData: ', formData);
-    // const id = document.querySelector('.modal__id').textContent;
     const newProduct = Object.fromEntries(formData);
-    console.log('newProduct: ', JSON.stringify(newProduct));
-    httpRequest(`${URL}/api/good`, {
+    if (formData.get('image').name) {
+      newProduct.image = 'image/' + formData.get('image').name;
+    } else {
+      delete newProduct.image;
+    }
+
+    httpRequest(`${URL}/api/goods`, {
       method: 'POST',
       callback: renderModalEror,
       body: newProduct,
     });
 
-    // newProduct.id = id;
-    /*
-    // проверка на наличие картинки
-    if (!formData.get('images').name) {
-      newProduct.images = {};
-    } else {
-      newProduct.images = {};
-      newProduct.images.small = 'img/' + formData.get('images').name;
-      newProduct.images.big = 'img/' + formData.get('images').name;
-    }
-    //addProductGoods(data, newProduct);
-    //addProductPage(newProduct, tableBody);
-    //getTotalPricePage(data);
     form.reset();
     totalPriceProduct.textContent = '$ 0.00';
-    //closeModal();
-    */
   });
 
 
