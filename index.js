@@ -9,11 +9,12 @@ const init = () => {
     method: 'get',
     callback: renderGoods,
   });
+
   const {closeModal} = modalControl();
 
-  //formControl(goods, closeModal);
+  formControl(closeModal);
   //deleteControl(goods);
-  imageControl();
+  //imageControl();
 };
 
 init();
