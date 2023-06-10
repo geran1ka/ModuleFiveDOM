@@ -1,4 +1,4 @@
-export const createRow = ({id, title, category, units, count, price, discont, image}) => {
+export const createRow = ({id, title, category, units, count, price, discount, image}) => {
   const row = document.createElement('tr');
   row.classList = 'table__row';
   row.id = id;
@@ -11,7 +11,7 @@ export const createRow = ({id, title, category, units, count, price, discont, im
     <td class="table__cell table__cell-count">${count}</td>
     <td class="table__cell table__cell-price">$${price}</td>
     <td class="table__cell table__cell-total">$
-      ${!discont ? Math.round(count * price) : Math.round(count * price - count * price * discont / 100)}
+      ${!discount ? Math.round(count * price) : Math.round(count * price - count * price * discount / 100)}
     </td>
     <td class="table__cell table__cell-btn">
       <button class="button button-table button-table_image" type="button" 

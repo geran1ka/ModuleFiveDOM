@@ -97,9 +97,10 @@ const formControl = (closeModal) => {
 
 
   form.addEventListener('change', () => {
-    if (form.discont.value) {
-      form.discont.value < 100 ? totalPriceProduct.textContent = '$ ' + Math.round(form.price.value * form.count.value -
-          form.price.value * form.count.value * form.discont.value / 100) :
+    if (form.discount.value) {
+      form.discount.value < 100 ? totalPriceProduct.textContent =
+      '$ ' + Math.round(form.price.value * form.count.value -
+          form.price.value * form.count.value * form.discount.value / 100) :
           totalPriceProduct.textContent = '$ 0.00';
     } else {
       totalPriceProduct.textContent = '$ ' + Math.round(form.price.value * form.count.value);
@@ -109,11 +110,11 @@ const formControl = (closeModal) => {
   form.addEventListener('click', (e) => {
     if (e.target.name === 'checkbox') {
       if (form.checkbox.checked) {
-        form.discont.disabled = false;
-        form.discont.focus();
+        form.discount.disabled = false;
+        form.discount.focus();
       } else {
-        form.discont.disabled = true;
-        form.discont.value = '';
+        form.discount.disabled = true;
+        form.discount.value = '';
       }
     }
   });
