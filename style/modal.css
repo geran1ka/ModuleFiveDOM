@@ -32,6 +32,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #6E6893;
+  text-align: center;
 }
 
 .error__wrapper {

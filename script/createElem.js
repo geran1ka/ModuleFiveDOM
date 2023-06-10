@@ -1,4 +1,3 @@
-
 const createElement = (tag, attr, {append, appends, parent, cb} = {}) => {
   const element = document.createElement(tag);
   // Проверка: передан ли атрибут

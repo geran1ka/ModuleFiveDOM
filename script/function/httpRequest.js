@@ -22,8 +22,7 @@ export const httpRequest = (url,
       }
 
       const data = JSON.parse(xhr.response);
-      console.log('data: ', data);
-      if (callback) callback(null, data);
+      if (callback) callback(null, null, data);
     });
 
     xhr.addEventListener('error', () => {
@@ -32,42 +31,7 @@ export const httpRequest = (url,
 
     xhr.send(JSON.stringify(body));
   } catch (err) {
-    callback(new Error(err));
-  }
-};
-
-/*
-httpRequest(URL, {
-  method: 'get',
-  callback: print,
-});
-*/
-const fetchRequest = async (url,
-    {methed = 'GET',
-      callback,
-      body,
-      headers,
-    }) => {
-  try {
-    const options = {
-      methed,
-    };
-
-    if (body) options.body = JSON.stringify(body);
-
-    if (headers) options.headers = headers;
-
-    const response = await fetch(url, options);
-
-    if (response.ok) {
-      const data = await response.json();
-      if (callback) callback(null, data);
-      return;
-    }
-
-    throw new Error(`Ошибка ${response.status}: ${response.statusText}`);
-  } catch (err) {
-    callback(err);
+    callback(new Error(err.status), err.response);
   }
 };
 
