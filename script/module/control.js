@@ -3,46 +3,19 @@ import {renderGoods} from './renderElement.js';
 import {
   tableBody,
   btnAddProduct,
-  overlay,
-  form,
-  totalPriceProduct,
   URL,
+  page,
 } from '../const.js';
 import {httpRequest} from '../function/httpRequest.js';
-import {renderEror} from '../function/renderError.js';
+import {showEror} from '../function/renderError.js';
+import {showModal} from './showModal.js';
 
 
-const modalControl = () => {
-  const openModal = () => {
-    overlay.classList.add('overlay_active');
-  };
-
-  const closeModal = () => {
-    overlay.classList.remove('overlay_active');
-  };
-
+const modalOpen = () => {
   btnAddProduct.addEventListener('click', () => {
-    openModal();
-    if (!form.checkbox.checked) {
-      form.discount.disabled = true;
-      form.discount.value = '';
-    }
+    showModal();
   });
-
-  overlay.addEventListener('click', e => {
-    const target = e.target;
-    if (target === overlay || target.closest('.modal__close')) {
-      closeModal();
-    }
-  });
-
-  return {
-    openModal,
-    closeModal,
-  };
 };
-
-const {closeModal} = modalControl();
 
 
 const deleteControl = (data) => {
@@ -57,14 +30,14 @@ const deleteControl = (data) => {
 };
 
 const renderModalEror = (err, response, data) => {
+  const overlay = document.querySelector('.overlay');
   if (err) {
-    const errorElem = renderEror(err, response);
-    overlay.append(errorElem);
+    const errorElem = showEror(err, response);
+    page.append(errorElem);
     return;
   }
-  form.reset();
-  totalPriceProduct.textContent = '$ 0.00';
-  closeModal();
+
+  overlay.remove();
 
   httpRequest(`${URL}/api/goods`, {
     method: 'get',
@@ -72,60 +45,18 @@ const renderModalEror = (err, response, data) => {
   });
 };
 
-const formControl = (closeModal) => {
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const newProduct = Object.fromEntries(formData);
-    if (formData.get('image').name) {
-      newProduct.image = 'image/' + formData.get('image').name;
-    } else {
-      delete newProduct.image;
-    }
-
-    httpRequest(`${URL}/api/goods`, {
-      method: 'POST',
-      callback: renderModalEror,
-      body: newProduct,
-    });
-  });
-
-
-  form.addEventListener('change', () => {
-    if (form.discount.value) {
-      form.discount.value < 100 ? totalPriceProduct.textContent =
-      '$ ' + Math.round(form.price.value * form.count.value -
-          form.price.value * form.count.value * form.discount.value / 100) :
-          totalPriceProduct.textContent = '$ 0.00';
-    } else {
-      totalPriceProduct.textContent = '$ ' + Math.round(form.price.value * form.count.value);
-    }
-  });
-
-  form.addEventListener('click', (e) => {
-    if (e.target.name === 'checkbox') {
-      if (form.checkbox.checked) {
-        form.discount.disabled = false;
-        form.discount.focus();
-      } else {
-        form.discount.disabled = true;
-        form.discount.value = '';
-      }
-    }
-  });
-};
-
 const imageControl = () => {
   tableBody.addEventListener('click', (e) => {
+    console.log('click');
     const target = e.target;
     if (target.closest('.button-table_image')) {
       const url = target.closest('.button-table_image').dataset.pic;
+      console.log('url: ', url);
       const width = 600;
       const height = 600;
       const top = (screen.height - height) / 2;
       const left = (screen.width - width) / 2;
-      if (url !== 'false') {
+      if (url !== 'image/notimage.jpg') {
         open(url, '', `width=${width},height=${height},top=${top},left=${left}`);
       }
     }
@@ -133,8 +64,8 @@ const imageControl = () => {
 };
 
 export {
-  modalControl,
+  modalOpen,
   deleteControl,
-  formControl,
   imageControl,
+  renderModalEror,
 };

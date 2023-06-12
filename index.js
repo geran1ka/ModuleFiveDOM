@@ -1,5 +1,5 @@
 import {renderGoods} from './script/module/renderElement.js';
-import {modalControl, formControl} from './script/module/control.js';
+import {modalOpen} from './script/module/control.js';
 import {URL} from './script/const.js';
 import {httpRequest} from './script/function/httpRequest.js';
 
@@ -9,11 +9,11 @@ const init = () => {
     callback: renderGoods,
   });
 
-  const {closeModal} = modalControl();
+  modalOpen();
 
-  formControl(closeModal);
+
   // deleteControl(goods);
-  // imageControl();
+  //imageControl();
 };
 
 init();
