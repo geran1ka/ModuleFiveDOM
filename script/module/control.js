@@ -1,14 +1,15 @@
 import {getTotalPricePage} from '../function/totalPriceAllProduct.js';
-import {renderGoods} from './renderElement.js';
+import {renderGoods} from './renderGoods.js';
 import {
   tableBody,
   btnAddProduct,
   URL,
   page,
 } from '../const.js';
-import {httpRequest} from '../function/httpRequest.js';
-import {showEror} from '../function/renderError.js';
+// import {httpRequest} from '../function/httpRequest.js';
+import {showEror} from './showEror.js';
 import {showModal} from './showModal.js';
+import {fetchRequest} from '../function/fetchRequest.js';
 
 
 const modalOpen = () => {
@@ -39,7 +40,7 @@ const renderModalEror = (err, response, data) => {
 
   overlay.remove();
 
-  httpRequest(`${URL}/api/goods`, {
+  fetchRequest(`${URL}/api/goods`, {
     method: 'get',
     callback: renderGoods,
   });

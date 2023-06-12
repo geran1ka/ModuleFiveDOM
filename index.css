@@ -2,5 +2,6 @@
 @import url("style/normalize.css");
 @import url("style/global.css");
 @import url("style/overlay.css");
-@import url("style/modal.css");
+@import url("style/showModal.css");
+@import url("style/showEror.css");
 @import url("style/smc.css");

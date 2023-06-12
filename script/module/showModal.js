@@ -2,6 +2,7 @@ import {createElement} from '../function/functionCreateElem.js';
 import {URL, page} from '../const.js';
 import {httpRequest} from '../function/httpRequest.js';
 import {renderModalEror} from './control.js';
+import { fetchRequest } from '../function/fetchRequest.js';
 
 export const showModal = () => {
   const overlay = createElement('div', {
@@ -294,7 +295,7 @@ export const showModal = () => {
       delete newProduct.image;
     }
 
-    httpRequest(`${URL}/api/goods`, {
+    fetchRequest(`${URL}/api/goods`, {
       method: 'POST',
       callback: renderModalEror,
       body: newProduct,

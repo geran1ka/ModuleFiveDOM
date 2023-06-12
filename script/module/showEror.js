@@ -1,6 +1,6 @@
-import {createElement} from './functionCreateElem.js';
+import {createElement} from '../function/functionCreateElem.js';
 
-export const showEror = (err, response) => createElement('div', {
+export const showEror = (err) => createElement('div', {
   className: 'overlay overlay_active',
 }, {
   append: createElement('div', {
@@ -21,7 +21,7 @@ export const showEror = (err, response) => createElement('div', {
       }),
       createElement('h3', {
         className: 'error__title',
-        textContent: `${err} : ${response ? JSON.parse(response)?.message : 'Что-то пошло не так...'}`,
+        textContent: `${err} Что-то пошло не так...`,
       }),
       createElement('button', {
         className: 'error__close close',
