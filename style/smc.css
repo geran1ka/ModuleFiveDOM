@@ -194,7 +194,7 @@
   min-height: 60px;
   border-bottom: 1px solid  var(--light-gray, #c6c2de);
   border-top: 1px solid  var(--light-gray, #c6c2de);
-
+  vertical-align: middle;
 }
 
 .table__cell-title {
@@ -252,11 +252,8 @@
 
 .table__cell-btn {
   padding: 0 8px 0 15px;
-  min-height: 69px;
   width: 124px;
-  display: flex;
-  gap: 20px;
-  align-items: center;
+  display: table-cell;
 }
 
 .table__row:hover .table__cell {
@@ -271,6 +268,11 @@
   transition: 
     transform 0.3s ease-in-out,
     color .3s ease-in-out;
+}
+
+.button-table_image,
+.button-table_edit {
+  margin-right: 15px;
 }
 
 .button-table:hover {
