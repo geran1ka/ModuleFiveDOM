@@ -26,35 +26,31 @@ export const showModal = async (err, goods = null) => {
     className: 'modal',
   });
 
-  overlay.append(modal);
-
   const modalContainer = createElement('div', {
     className: 'modal__container',
   });
 
-  modal.append(modalContainer);
-
   const modalGrouppTitle = createElement('div', {
     className: 'modal__group',
+  });
+
+  const idGoods = createElement('p', {
+    className: 'modal__text',
+    textContent: 'ID:',
   }, {
-    append: createElement('p', {
-      className: goods ? 'modal__text' : 'visually-hidden',
-      textContent: 'ID:',
-    }, {
-      append: createElement('span', {
-        className: 'modal__id',
-        textContent: goods ? goods.id : '',
-      }),
+    append: createElement('span', {
+      className: 'modal__id',
+      textContent: goods?.id,
     }),
   });
 
   const modalTitle = createElement('h2', {
     className: 'modal__title',
-    textContent: goods ? 'Изменить ТОВАР' : 'Добавить ТОВАР',
+    textContent: 'Добавить ТОВАР',
   });
 
   const btnEditModal = createElement('button', {
-    className: goods ? 'button modal__button' : 'visually-hidden',
+    className: 'button modal__button',
     type: 'button',
     innerHTML: `
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -63,9 +59,6 @@ export const showModal = async (err, goods = null) => {
             </svg>
           `,
   });
-
-  modalGrouppTitle.prepend(modalTitle);
-  modalGrouppTitle.append(btnEditModal);
 
   const btnClose = createElement('button', {
     className: 'modal__close',
@@ -96,7 +89,7 @@ export const showModal = async (err, goods = null) => {
             appends: [
               createElement('label', {
                 className: 'form__label',
-                htmlFor: '#title',
+                htmlFor: 'title',
                 textContent: 'Наименование',
               }),
               createElement('input', {
@@ -105,7 +98,7 @@ export const showModal = async (err, goods = null) => {
                 name: 'title',
                 id: 'title',
                 required: 'required',
-                value: goods ? goods.title : '',
+                // value: goods ? goods.title : '',
               }),
               // div group_name
             ],
@@ -125,7 +118,7 @@ export const showModal = async (err, goods = null) => {
                 name: 'category',
                 id: 'category',
                 required: 'required',
-                value: goods ? goods.category : '',
+                // value: goods ? goods.category : '',
               }),
               // div group_category
             ],
@@ -145,7 +138,7 @@ export const showModal = async (err, goods = null) => {
                 name: 'units',
                 id: 'units',
                 required: 'required',
-                value: `${goods ? goods.units : ''}`,
+                // value: `${goods ? goods.units : ''}`,
               }),
               // div group_units
             ],
@@ -167,17 +160,18 @@ export const showModal = async (err, goods = null) => {
                     className: 'form__checkbox',
                     type: 'checkbox',
                     name: 'checkbox',
-                    checked: goods ? goods.discount > 0 : false,
+                    // checked: goods ? goods.discount > 0 : false,
                     arialabel: 'Добавить скидку',
                   }),
                   createElement('input', {
                     className: 'form__input',
                     type: 'number',
                     name: 'discount',
+                    min: 0,
+                    max: 100,
                     id: 'discount',
-                    disabled: goods?.discount ? '' : 'disabled',
+                    disabled: 'disabled',
                     required: 'required',
-                    value: goods ? goods.discount > 0 ? goods.discount : '' : '',
                   }),
                 ],
               }),
@@ -200,7 +194,6 @@ export const showModal = async (err, goods = null) => {
                 cols: 30,
                 rows: 5,
                 required: 'required',
-                value: goods ? goods.description : '',
               }),
               // div group_description
             ],
@@ -220,7 +213,6 @@ export const showModal = async (err, goods = null) => {
                 name: 'count',
                 id: 'count',
                 required: 'required',
-                value: goods ? goods.count : '',
               }),
               // div group_count
             ],
@@ -240,7 +232,6 @@ export const showModal = async (err, goods = null) => {
                 name: 'price',
                 id: 'price',
                 required: 'required',
-                value: goods ? goods.price : '',
               }),
               // div group_price
             ],
@@ -260,7 +251,6 @@ export const showModal = async (err, goods = null) => {
                 id: 'image',
                 name: 'image',
                 accept: 'image/*',
-                // value: goods ? goods.image : '',
               }),
               // div group_add-img
             ],
@@ -268,34 +258,52 @@ export const showModal = async (err, goods = null) => {
           // fieldset - 1
         ],
       }),
-      createElement('fieldset', {
-        className: 'form__group-2',
-      }, {
-        appends: [
-          createElement('p', {
-            className: 'form__text',
-            textContent: 'Итоговая стоимость: ',
-          }, {
-            append: createElement('span', {
-              className: 'form__text-price',
-              textContent: goods ?
-              `$ ${goods.price * goods.count - goods.price * goods.count * goods.discount / 100}` :
-                '$ 0.00',
-            }),
-          }),
-          createElement('button', {
-            className: 'button-add-product',
-            type: 'submit',
-            textContent: 'Добавить товар',
-          }),
-        ],
-      }),
       // form
     ],
   });
 
-  modalContainer.append(modalGrouppTitle, modalForm, btnClose);
+  const footerModal = createElement('fieldset', {
+    className: 'form__group-2',
+  });
+  const textTotalPrice = createElement('p', {
+    className: 'form__text',
+    textContent: 'Итоговая стоимость: ',
+  });
 
+  const totalPriceGoods = createElement('span', {
+    className: 'form__text-price',
+    textContent: '$ 0.00',
+  });
+
+  const btnAddGoods = createElement('button', {
+    className: 'button-add-product',
+    type: 'submit',
+    textContent: 'Добавить товар',
+  });
+
+  textTotalPrice.append(totalPriceGoods);
+  footerModal.append(textTotalPrice, btnAddGoods);
+  modalForm.append(footerModal);
+  modalGrouppTitle.append(modalTitle);
+  modalContainer.append(modalGrouppTitle, modalForm, btnClose);
+  modal.append(modalContainer);
+  overlay.append(modal);
+
+  if (goods) {
+    modalTitle.textContent = 'Изменить ТОВАР';
+    modalGrouppTitle.append(idGoods, btnEditModal);
+
+    modalForm.title.value = goods.title;
+    modalForm.category.value = goods.category;
+    modalForm.units.value = goods.units;
+    modalForm.checkbox.checked = !!goods?.discount;
+    modalForm.discount.disabled = !goods?.discount;
+    modalForm.discount.value = goods.discount > 0 ? goods.discount : '';
+    modalForm.description.value = goods.description;
+    modalForm.count.value = goods.count;
+    modalForm.price.value = goods.price;
+    totalPriceGoods.textContent = `$ ${goods.price * goods.count - goods.price * goods.count * goods.discount / 100}`;
+  }
 
   modalForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -315,16 +323,15 @@ export const showModal = async (err, goods = null) => {
     });
   });
 
-  const totalPriceProduct = document.querySelector('.form__text-price');
 
   modalForm.addEventListener('change', () => {
     if (modalForm.discount.value) {
-      modalForm.discount.value < 100 ? totalPriceProduct.textContent =
+      modalForm.discount.value < 100 ? totalPriceGoods.textContent =
       '$ ' + Math.round(modalForm.price.value * modalForm.count.value -
         modalForm.price.value * modalForm.count.value * modalForm.discount.value / 100) :
-          totalPriceProduct.textContent = '$ 0.00';
+        totalPriceGoods.textContent = '$ 0.00';
     } else {
-      totalPriceProduct.textContent = '$ ' + Math.round(modalForm.price.value * modalForm.count.value);
+      totalPriceGoods.textContent = '$ ' + Math.round(modalForm.price.value * modalForm.count.value);
     }
   });
 

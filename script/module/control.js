@@ -41,10 +41,10 @@ const deleteControl = (data) => {
   });
 };
 
-const renderModalEror = (err, response, data) => {
+const renderModalEror = async (err, data) => {
   const overlay = document.querySelector('.overlay');
   if (err) {
-    const errorElem = showEror(err, response);
+    const errorElem = await showEror(err);
     page.append(errorElem);
     return;
   }
