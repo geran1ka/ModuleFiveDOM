@@ -2,9 +2,11 @@ import {createElement} from '../function/functionCreateElem.js';
 import {URL, page} from '../const.js';
 import {httpRequest} from '../function/httpRequest.js';
 import {renderModalEror} from './control.js';
-import { fetchRequest } from '../function/fetchRequest.js';
+import {fetchRequest} from '../function/fetchRequest.js';
 
-export const showModal = () => {
+export const showModal = (err, goods = null) => {
+
+  console.log(goods);
   const overlay = createElement('div', {
     className: 'overlay overlay_active',
   }, {
@@ -35,23 +37,23 @@ export const showModal = () => {
     className: 'modal__group',
   }, {
     append: createElement('p', {
-      className: 'modal__text',
+      className: goods ? 'modal__text' : 'visually-hidden',
       textContent: 'ID:',
     }, {
       append: createElement('span', {
         className: 'modal__id',
-        textContent: 201910241,
+        textContent: goods ? goods.id : '',
       }),
     }),
   });
 
   const modalTitle = createElement('h2', {
     className: 'modal__title',
-    textContent: 'Добавить ТОВАР',
+    textContent: goods ? 'Изменить ТОВАР' : 'Добавить ТОВАР',
   });
 
   const btnEditModal = createElement('button', {
-    className: 'button modal__button',
+    className: goods ? 'button modal__button' : 'visually-hidden',
     type: 'button',
     innerHTML: `
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -102,6 +104,7 @@ export const showModal = () => {
                 name: 'title',
                 id: 'title',
                 required: 'required',
+                value: goods ? goods.title : '',
               }),
               // div group_name
             ],
@@ -121,6 +124,7 @@ export const showModal = () => {
                 name: 'category',
                 id: 'category',
                 required: 'required',
+                value: goods ? goods.category : '',
               }),
               // div group_category
             ],
@@ -140,6 +144,7 @@ export const showModal = () => {
                 name: 'units',
                 id: 'units',
                 required: 'required',
+                value: `${goods ? goods.units : ''}`,
               }),
               // div group_units
             ],
@@ -168,8 +173,9 @@ export const showModal = () => {
                     type: 'number',
                     name: 'discount',
                     id: 'discount',
-                    disabled: 'disabled',
+                    disabled: goods ? '' : 'disabled',
                     required: 'required',
+                    value: goods ? goods.discount : '',
                   }),
                 ],
               }),
@@ -192,6 +198,7 @@ export const showModal = () => {
                 cols: 30,
                 rows: 5,
                 required: 'required',
+                value: goods ? goods.description : '',
               }),
               // div group_description
             ],
@@ -211,6 +218,7 @@ export const showModal = () => {
                 name: 'count',
                 id: 'count',
                 required: 'required',
+                value: goods ? goods.count : '',
               }),
               // div group_count
             ],
@@ -230,6 +238,7 @@ export const showModal = () => {
                 name: 'price',
                 id: 'price',
                 required: 'required',
+                value: goods ? goods.price : '',
               }),
               // div group_price
             ],
@@ -249,6 +258,7 @@ export const showModal = () => {
                 id: 'image',
                 name: 'image',
                 accept: 'image/*',
+                // value: goods ? goods.image : '',
               }),
               // div group_add-img
             ],
@@ -266,7 +276,9 @@ export const showModal = () => {
           }, {
             append: createElement('span', {
               className: 'form__text-price',
-              textContent: `$ 0.00`,
+              textContent: goods ?
+              `$${goods.price * goods.count - goods.price * goods.count * goods.discount / 100}` :
+                '$ 0.00',
             }),
           }),
           createElement('button', {
@@ -326,6 +338,8 @@ export const showModal = () => {
       }
     }
   });
+
+
 
 
   return {overlay, modalTitle, btnEditModal, btnClose, modalForm};
