@@ -3,10 +3,11 @@ import {URL, page} from '../const.js';
 import {httpRequest} from '../function/httpRequest.js';
 import {renderModalEror} from './control.js';
 import {fetchRequest} from '../function/fetchRequest.js';
+import {loadStyle} from '../function/loadStyle.js';
 
-export const showModal = (err, goods = null) => {
+export const showModal = async (err, goods = null) => {
+  await loadStyle('style/showModal.css');
 
-  console.log(goods);
   const overlay = createElement('div', {
     className: 'overlay overlay_active',
   }, {
@@ -166,6 +167,7 @@ export const showModal = (err, goods = null) => {
                     className: 'form__checkbox',
                     type: 'checkbox',
                     name: 'checkbox',
+                    checked: goods ? goods.discount > 0 : false,
                     arialabel: 'Добавить скидку',
                   }),
                   createElement('input', {
@@ -173,9 +175,9 @@ export const showModal = (err, goods = null) => {
                     type: 'number',
                     name: 'discount',
                     id: 'discount',
-                    disabled: goods ? '' : 'disabled',
+                    disabled: goods?.discount ? '' : 'disabled',
                     required: 'required',
-                    value: goods ? goods.discount : '',
+                    value: goods ? goods.discount > 0 ? goods.discount : '' : '',
                   }),
                 ],
               }),
@@ -277,14 +279,13 @@ export const showModal = (err, goods = null) => {
             append: createElement('span', {
               className: 'form__text-price',
               textContent: goods ?
-              `$${goods.price * goods.count - goods.price * goods.count * goods.discount / 100}` :
+              `$ ${goods.price * goods.count - goods.price * goods.count * goods.discount / 100}` :
                 '$ 0.00',
             }),
           }),
           createElement('button', {
             className: 'button-add-product',
             type: 'submit',
-            formTarget: '_blank',
             textContent: 'Добавить товар',
           }),
         ],
@@ -338,10 +339,6 @@ export const showModal = (err, goods = null) => {
       }
     }
   });
-
-
-
-
   return {overlay, modalTitle, btnEditModal, btnClose, modalForm};
 };
 

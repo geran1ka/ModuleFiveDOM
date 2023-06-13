@@ -20,7 +20,7 @@ const modalOpen = () => {
   tableBody.addEventListener('click', ({target}) => {
     if (target.closest('.button-table_edit')) {
       const idGoods = target.closest('.table__row').id;
-      
+
       fetchRequest(`${URL}/api/goods/${idGoods}`, {
         method: 'GET',
         callback: showModal,

@@ -4,7 +4,7 @@ export const showEror = (err) => createElement('div', {
   className: 'overlay overlay_active',
 }, {
   append: createElement('div', {
-    className: 'modal__error error',
+    className: 'error',
   }, {
     appends: [
       createElement('div', {
