@@ -324,6 +324,7 @@ export const showModal = async (err, goods = null) => {
     }
 
     totalPriceGoods.textContent = `$ ${goods.price * goods.count - goods.price * goods.count * goods.discount / 100}`;
+    btnAddGoods.textContent = 'Изменить товар';
   }
 
 
@@ -352,12 +353,19 @@ export const showModal = async (err, goods = null) => {
     } else {
       delete newProduct.image;
     }
-
-    fetchRequest(`${URL}/api/goods`, {
-      method: 'POST',
-      callback: renderModalEror,
-      body: newProduct,
-    });
+    if (goods) {
+      fetchRequest(`${URL}/api/goods/${goods.id}`, {
+        method: 'PATCH',
+        callback: renderModalEror,
+        body: newProduct,
+      });
+    } else {
+      fetchRequest(`${URL}/api/goods`, {
+        method: 'POST',
+        callback: renderModalEror,
+        body: newProduct,
+      });
+    }
   });
 
 

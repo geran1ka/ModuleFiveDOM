@@ -10,7 +10,7 @@ import {
 import {showEror} from './showEror.js';
 import {showModal} from './showModal.js';
 import {fetchRequest} from '../function/fetchRequest.js';
-import { scrollController } from '../function/scrollControl.js';
+import {scrollController} from '../function/scrollControl.js';
 
 
 const modalOpen = () => {
@@ -36,9 +36,17 @@ const deleteControl = (data) => {
   tableBody.addEventListener('click', (e) => {
     const target = e.target;
     if (target.closest('.button-table_del')) {
-      data.splice(data.findIndex(item => item.id === +target.closest('.table__row').getAttribute('id')), 1);
-      target.closest('.table__row').remove();
-      getTotalPricePage(data);
+      const idGoods = target.closest('.table__row').id;
+
+      fetchRequest(`${URL}/api/goods/${idGoods}`, {
+        method: 'DELETE',
+      });
+      //target.closest('.table__row').remove();
+      tableBody.textContent = '';
+      fetchRequest(`${URL}/api/goods`, {
+        method: 'get',
+        callback: renderGoods,
+      });
     }
   });
 };
