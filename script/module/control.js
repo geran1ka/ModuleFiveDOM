@@ -10,11 +10,13 @@ import {
 import {showEror} from './showEror.js';
 import {showModal} from './showModal.js';
 import {fetchRequest} from '../function/fetchRequest.js';
+import { scrollController } from '../function/scrollControl.js';
 
 
 const modalOpen = () => {
   btnAddProduct.addEventListener('click', () => {
     showModal();
+    scrollController.disabledScroll();
   });
 
   tableBody.addEventListener('click', ({target}) => {
@@ -50,6 +52,7 @@ const renderModalEror = async (err, data) => {
   }
 
   overlay.remove();
+  scrollController.enabledScroll();
 
   fetchRequest(`${URL}/api/goods`, {
     method: 'get',
@@ -66,7 +69,9 @@ const imageControl = () => {
       const width = 600;
       const height = 600;
       const top = (screen.height - height) / 2;
+      console.log('top: ', top);
       const left = (screen.width - width) / 2;
+      console.log('left: ', left);
       if (url !== 'image/notimage.jpg') {
         open(`${URL}/${url}`, '', `width=${width},height=${height},top=${top},left=${left}`);
       }

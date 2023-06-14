@@ -5,6 +5,7 @@ import {renderModalEror} from './control.js';
 import {fetchRequest} from '../function/fetchRequest.js';
 import {loadStyle} from '../function/loadStyle.js';
 import {toBase64} from '../function/toBase64.js';
+import {scrollController} from '../function/scrollControl.js';
 
 export const showModal = async (err, goods = null) => {
   await loadStyle('style/showModal.css');
@@ -18,6 +19,7 @@ export const showModal = async (err, goods = null) => {
         const target = e.target;
         if (elem === target || target.closest('.modal__close')) {
           overlay.remove();
+          scrollController.enabledScroll();
         }
       });
     },
