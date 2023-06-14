@@ -86,14 +86,14 @@
 .form__group {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 60px;
+  grid-auto-rows: min-content;
   grid-template-areas: 
     "title description"
     "category description"
     "units count"
     "discount price"
-    ". images";
-    justify-content: space-between;
+    "images images";
+  justify-content: space-between;
   column-gap: 24px;
   row-gap: 12px;
   margin-bottom: 28px;
@@ -138,11 +138,43 @@
 }
 
 .group_add-img {
+  padding-top: 20px;
   grid-area: images;
-  align-self: flex-end;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: 
+    'error label-img'
+    'image-preview image-preview';
+  justify-items: center;
+  column-gap: 23px;
+}
+
+
+.image-error {
+  display: none;
+  grid-area: error;
+  margin: 0;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  color: #D80101;
+}
+
+.image-preview {
+  display: none;
+  grid-area: image-preview;
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
 }
 
 .form__label-img {
+  width: 100%;
+  grid-area: label-img;
   padding: 11px 10px;
   font-family: 'Inter';
   font-weight: 600;

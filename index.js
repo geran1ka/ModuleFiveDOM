@@ -1,5 +1,5 @@
 import {renderGoods} from './script/module/renderGoods.js';
-import {modalOpen} from './script/module/control.js';
+import {imageControl, modalOpen} from './script/module/control.js';
 import {URL} from './script/const.js';
 //import {httpRequest} from './script/function/httpRequest.js';
 import {fetchRequest} from './script/function/fetchRequest.js';
@@ -14,7 +14,7 @@ const init = () => {
 
 
   // deleteControl(goods);
-  // imageControl();
+  imageControl();
 };
 
 init();

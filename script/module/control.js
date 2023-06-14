@@ -63,13 +63,12 @@ const imageControl = () => {
     const target = e.target;
     if (target.closest('.button-table_image')) {
       const url = target.closest('.button-table_image').dataset.pic;
-      console.log('url: ', url);
       const width = 600;
       const height = 600;
       const top = (screen.height - height) / 2;
       const left = (screen.width - width) / 2;
       if (url !== 'image/notimage.jpg') {
-        open(url, '', `width=${width},height=${height},top=${top},left=${left}`);
+        open(`${URL}/${url}`, '', `width=${width},height=${height},top=${top},left=${left}`);
       }
     }
   });
