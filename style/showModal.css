@@ -149,9 +149,13 @@
   column-gap: 23px;
 }
 
+.img {
 
-.image-error {
+}
+
+.img__error {
   display: none;
+  align-items: center;
   grid-area: error;
   margin: 0;
   font-weight: 700;
@@ -164,15 +168,38 @@
   color: #D80101;
 }
 
-.image-preview {
+.img__wrapper {
+  position: relative;
   display: none;
   grid-area: image-preview;
+}
+
+.img__preview {
   width: 200px;
   height: 200px;
   object-fit: contain;
 }
 
-.form__label-img {
+.img__btn-delete {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: none;
+  background: transparent;
+  color: black;
+  width: 25px;
+
+  transition: 
+    color .3s ease-in-out,
+    transform .3s ease-in-out;
+}
+
+.img__btn-delete:hover {
+  color: var(----persian-blue, #4636c3);
+  transform: scale(1.2);
+}
+
+.img__label {
   width: 100%;
   grid-area: label-img;
   padding: 11px 10px;
@@ -186,17 +213,18 @@
   background-color: var(--violet, #6d5bd0);
   border-radius: 6px;
   border: 1px solid var(--violet, #6d5bd0);
+  cursor: pointer;
 
   transition: 
   color 0.5s ease-in-out,
   background-color 0.5s ease-in-out;
 }
 
-.form__label-img:hover {
+.img__label:hover {
   background-color:var(--persian-blue, #4636c3);
 }
 
-.form__label-img:active {
+.img__label:active {
   background-color:var(--main-bg-color, #ffffff);
   color:var(--persian-blue, #4636c3);
 }
@@ -352,7 +380,7 @@
     padding-bottom: 14px;
   }
 
-  .form__label-img {
+  .img__label {
     font-size: 12px;
   }
 

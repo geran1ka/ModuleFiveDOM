@@ -40,16 +40,21 @@ const deleteControl = (data) => {
 
       fetchRequest(`${URL}/api/goods/${idGoods}`, {
         method: 'DELETE',
+        callback: (err, data) => {
+          if (err) {
+            const errorElem = showEror(err);
+            tableBody.append(errorElem);
+            return;
+          }
+          if (data) {
+            console.log('data');
+            fetchRequest(`${URL}/api/goods`, {
+              method: 'get',
+              callback: renderGoods,
+            });
+          }
+        },
       });
-
-      console.log('delete');
-      setTimeout(() => {
-        fetchRequest(`${URL}/api/goods`, {
-          method: 'get',
-          callback: renderGoods,
-        });
-        console.log('get');
-      }, 1000);
     }
   });
 };
@@ -73,7 +78,6 @@ const renderModalEror = async (err, data) => {
 
 const imageControl = () => {
   tableBody.addEventListener('click', (e) => {
-    console.log('click');
     const target = e.target;
     if (target.closest('.button-table_image')) {
       const url = target.closest('.button-table_image').dataset.pic;

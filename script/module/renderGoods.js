@@ -13,4 +13,6 @@ export const renderGoods = (err, array) => {
   getTotalPricePage(array);
   tableBody.textContent = '';
   array.map(item => tableBody.append(createRow(item)));
+
+  return true;
 };
