@@ -1,4 +1,3 @@
-import {getTotalPricePage} from '../function/totalPriceAllProduct.js';
 import {renderGoods} from './renderGoods.js';
 import {
   tableBody,
@@ -6,11 +5,11 @@ import {
   URL,
   page,
 } from '../const.js';
-// import {httpRequest} from '../function/httpRequest.js';
 import {showEror} from './showEror.js';
 import {showModal} from './showModal.js';
 import {fetchRequest} from '../function/fetchRequest.js';
 import {scrollController} from '../function/scrollControl.js';
+import {deleteData, getData, getDataId, updateData} from './serviceAPI.js';
 
 
 const modalOpen = () => {
@@ -22,39 +21,17 @@ const modalOpen = () => {
   tableBody.addEventListener('click', ({target}) => {
     if (target.closest('.button-table_edit')) {
       const idGoods = target.closest('.table__row').id;
-
-      fetchRequest(`${URL}/api/goods/${idGoods}`, {
-        method: 'GET',
-        callback: showModal,
-      });
+      getDataId(showModal, idGoods);
     }
   });
 };
-
 
 const deleteControl = (data) => {
   tableBody.addEventListener('click', (e) => {
     const target = e.target;
     if (target.closest('.button-table_del')) {
       const idGoods = target.closest('.table__row').id;
-
-      fetchRequest(`${URL}/api/goods/${idGoods}`, {
-        method: 'DELETE',
-        callback: (err, data) => {
-          if (err) {
-            const errorElem = showEror(err);
-            tableBody.append(errorElem);
-            return;
-          }
-          if (data) {
-            console.log('data');
-            fetchRequest(`${URL}/api/goods`, {
-              method: 'get',
-              callback: renderGoods,
-            });
-          }
-        },
-      });
+      deleteData(idGoods, tableBody, showEror, renderGoods);
     }
   });
 };
@@ -69,11 +46,7 @@ const renderModalEror = async (err, data) => {
 
   overlay.remove();
   scrollController.enabledScroll();
-
-  fetchRequest(`${URL}/api/goods`, {
-    method: 'get',
-    callback: renderGoods,
-  });
+  getData(renderGoods);
 };
 
 const imageControl = () => {
