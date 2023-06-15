@@ -302,6 +302,7 @@ export const showModal = async (err, goods = null) => {
   const imgWrapper = document.querySelector('.group_add-img');
   const preview = document.querySelector('.image-preview');
   const imageError = document.querySelector('.image-error');
+  const addImg = document.querySelector('.form__label-img');
 
 
   if (goods) {
@@ -321,6 +322,7 @@ export const showModal = async (err, goods = null) => {
       preview.src = `${URL}/${goods.image}`;
       imgWrapper.style.rowGap = '30px';
       preview.style.display = 'block';
+      addImg.textContent = 'Изменить изображение';
     }
 
     totalPriceGoods.textContent = `$ ${goods.price * goods.count - goods.price * goods.count * goods.discount / 100}`;
@@ -348,6 +350,7 @@ export const showModal = async (err, goods = null) => {
 
     const formData = new FormData(e.target);
     const newProduct = Object.fromEntries(formData);
+    console.log('newProduct: ', newProduct);
     if (formData.get('image').name) {
       newProduct.image = await toBase64(newProduct.image);
     } else {
@@ -366,6 +369,7 @@ export const showModal = async (err, goods = null) => {
         body: newProduct,
       });
     }
+    console.log('newProduct: ', newProduct);
   });
 
 

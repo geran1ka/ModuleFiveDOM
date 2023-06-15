@@ -13,9 +13,11 @@ export const fetchRequest = async (url, {
     if (headers) options.headers = JSON.stringify(headers);
 
     const response = await fetch(url, options);
+    console.log('response: ', response);
 
     if (response.ok) {
       const data = await response.json();
+      console.log('data: ', data);
       if (callback) callback(null, data);
       return;
     }

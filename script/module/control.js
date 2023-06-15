@@ -41,12 +41,15 @@ const deleteControl = (data) => {
       fetchRequest(`${URL}/api/goods/${idGoods}`, {
         method: 'DELETE',
       });
-      //target.closest('.table__row').remove();
-      tableBody.textContent = '';
-      fetchRequest(`${URL}/api/goods`, {
-        method: 'get',
-        callback: renderGoods,
-      });
+
+      console.log('delete');
+      setTimeout(() => {
+        fetchRequest(`${URL}/api/goods`, {
+          method: 'get',
+          callback: renderGoods,
+        });
+        console.log('get');
+      }, 1000);
     }
   });
 };
@@ -77,9 +80,7 @@ const imageControl = () => {
       const width = 600;
       const height = 600;
       const top = (screen.height - height) / 2;
-      console.log('top: ', top);
       const left = (screen.width - width) / 2;
-      console.log('left: ', left);
       if (url !== 'image/notimage.jpg') {
         open(`${URL}/${url}`, '', `width=${width},height=${height},top=${top},left=${left}`);
       }
