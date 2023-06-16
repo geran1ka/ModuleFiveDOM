@@ -2,7 +2,7 @@ import {createElement} from '../function/functionCreateElem.js';
 import {scrollController} from '../function/scrollControl.js';
 
 export const createOverlay = () => createElement('div', {
-  className: 'overlay overlay_active',
+  className: 'overlay',
 }, {
   cb(elem) { // закртыие модального окна
     elem.addEventListener('click', (e) => {

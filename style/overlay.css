@@ -6,13 +6,9 @@
   left: 0;
   z-index: 100;
   background-color: rgba(0, 0, 0, 0.5);
-  display: none;
+  display: flex;
   /*align-items: center;*/
   justify-content: center;
   padding: 10px;
   overflow-y: auto;
-}
-
-.overlay_active {
-  display: flex;
 }

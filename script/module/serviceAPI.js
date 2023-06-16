@@ -1,5 +1,6 @@
 import {URL} from '../const.js';
 import {fetchRequest} from '../function/fetchRequest.js';
+import {createError} from './createError.js';
 
 
 export const getData = (callback) => fetchRequest(`${URL}/api/goods`, {
@@ -10,7 +11,7 @@ export const getData = (callback) => fetchRequest(`${URL}/api/goods`, {
 export const getDataId = (callback, id) => fetchRequest(`${URL}/api/goods/${id}`, {
   method: 'GET',
   callback,
-});
+}); // не выводится ошибка
 
 
 export const sendData = (body, callback) => fetchRequest(`${URL}/api/goods`, {
@@ -26,11 +27,11 @@ export const updateData = (body, callback, id) => fetchRequest(`${URL}/api/goods
   body,
 });
 
-export const deleteData = (id, elem, showEror, renderGoods) => fetchRequest(`${URL}/api/goods/${id}`, {
+export const deleteData = (elem, renderGoods, id) => fetchRequest(`${URL}/api/goods/${id}`, {
   method: 'DELETE',
   callback: (err, data) => {
     if (err) {
-      const errorElem = showEror(err);
+      const errorElem = createError(err);
       elem.append(errorElem);
       return;
     }

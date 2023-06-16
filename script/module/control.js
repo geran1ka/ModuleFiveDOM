@@ -8,7 +8,7 @@ import {
 import {createError} from './createError.js';
 import {showModal} from './showModal.js';
 import {scrollController} from '../function/scrollControl.js';
-import {deleteData, getData, getDataId, updateData} from './serviceAPI.js';
+import {deleteData, getData, getDataId} from './serviceAPI.js';
 
 
 const modalOpen = () => {
@@ -19,8 +19,7 @@ const modalOpen = () => {
 
   tableBody.addEventListener('click', ({target}) => {
     if (target.closest('.button-table_edit')) {
-      const idGoods = target.closest('.table__row').id;
-      getDataId(showModal, idGoods);
+      getDataId(showModal, target.closest('.table__row').id);
     }
   });
 };
@@ -29,8 +28,7 @@ const deleteControl = (data) => {
   tableBody.addEventListener('click', (e) => {
     const target = e.target;
     if (target.closest('.button-table_del')) {
-      const idGoods = target.closest('.table__row').id;
-      deleteData(idGoods, tableBody, createError, renderGoods);
+      deleteData(tableBody, renderGoods, target.closest('.table__row').id);
     }
   });
 };
