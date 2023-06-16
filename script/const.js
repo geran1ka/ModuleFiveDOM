@@ -1,5 +1,5 @@
-//const URL = 'https://dazzling-rain-account.glitch.me';
-const URL = 'http://localhost:3000';
+const URL = 'https://dazzling-rain-account.glitch.me';
+// const URL = 'http://localhost:3000';
 
 const page = document.querySelector('.page');
 const table = document.querySelector('.table');
