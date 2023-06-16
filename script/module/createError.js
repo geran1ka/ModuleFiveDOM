@@ -1,7 +1,7 @@
 import {createElement} from '../function/functionCreateElem.js';
 // import {loadStyle} from '../function/loadStyle.js';
 
-export const showEror = (err) =>
+export const createError = (err) =>
 // loadStyle('style/showEror.css');
 
   createElement('div', {

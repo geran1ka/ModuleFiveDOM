@@ -5,9 +5,8 @@ import {
   URL,
   page,
 } from '../const.js';
-import {showEror} from './showEror.js';
+import {createError} from './createError.js';
 import {showModal} from './showModal.js';
-import {fetchRequest} from '../function/fetchRequest.js';
 import {scrollController} from '../function/scrollControl.js';
 import {deleteData, getData, getDataId, updateData} from './serviceAPI.js';
 
@@ -31,7 +30,7 @@ const deleteControl = (data) => {
     const target = e.target;
     if (target.closest('.button-table_del')) {
       const idGoods = target.closest('.table__row').id;
-      deleteData(idGoods, tableBody, showEror, renderGoods);
+      deleteData(idGoods, tableBody, createError, renderGoods);
     }
   });
 };
@@ -39,7 +38,7 @@ const deleteControl = (data) => {
 const renderModalEror = async (err, data) => {
   const overlay = document.querySelector('.overlay');
   if (err) {
-    const errorElem = await showEror(err);
+    const errorElem = await createError(err);
     page.append(errorElem);
     return;
   }

@@ -1,12 +1,12 @@
 import {tableBody} from '../const.js';
 import {getTotalPricePage} from '../function/totalPriceAllProduct.js';
 import {createRow} from './createElement.js';
-import {showEror} from './showEror.js';
+import {createError} from './createError.js';
 
 
 export const renderGoods = (err, array) => {
   if (err) {
-    const errorElem = showEror(err);
+    const errorElem = createError(err);
     tableBody.append(errorElem);
     return;
   }

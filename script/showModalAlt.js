@@ -1,9 +1,9 @@
-import {createElement} from '../function/functionCreateElem.js';
-import {URL, page} from '../const.js';
-import {httpRequest} from '../function/httpRequest.js';
-import {renderModalEror} from './control.js';
-import {fetchRequest} from '../function/fetchRequest.js';
-import {loadStyle} from '../function/loadStyle.js';
+import {createElement} from './function/functionCreateElem.js';
+import {URL, page} from './const.js';
+import {httpRequest} from './function/httpRequest.js';
+import {renderModalEror} from './module/control.js';
+import {fetchRequest} from './function/fetchRequest.js';
+import {loadStyle} from './function/loadStyle.js';
 
 export const showModal = async (err, goods = null) => {
   await loadStyle('style/showModal.css');
