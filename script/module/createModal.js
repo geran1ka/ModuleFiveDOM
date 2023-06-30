@@ -164,7 +164,7 @@ export const createModal = () => {
       }, {
         appends: [
           createElement('label', {
-            className: 'form__label',
+            className: 'form__label form__label-description',
             htmlFor: 'description',
             textContent: 'Описание',
           }),
@@ -299,7 +299,7 @@ export const createModal = () => {
   });
 
   const btnAddGoods = createElement('button', {
-    className: 'button-add-product',
+    className: 'button-add-product button-add-product__modal',
     type: 'submit',
     textContent: 'Добавить товар',
   }, {

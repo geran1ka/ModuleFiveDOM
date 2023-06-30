@@ -5,6 +5,7 @@ import {toBase64} from '../function/toBase64.js';
 import {sendData, updateData} from './serviceAPI.js';
 import {createModal} from './createModal.js';
 import {createOverlay} from './createOverlay.js';
+import { allowInputOnlySymbol } from '../function/allowInputOnlySymbol.js';
 
 export const showModal = async (err, goods = null) => {
   await loadStyle('style/showModal.css');
@@ -28,8 +29,14 @@ export const showModal = async (err, goods = null) => {
     messageError,
   } = createModal();
 
+  btnAddGoods.setAttribute('disabled', 'disabled');
+
   overlay.append(modal);
   page.append(overlay);
+
+  console.log(modalForm.title);
+
+  allowInputOnlySymbol(modalForm, btnAddGoods);
 
   if (goods) {
     modalTitle.textContent = 'Изменить ТОВАР';
@@ -106,6 +113,7 @@ export const showModal = async (err, goods = null) => {
     }
   });
 
+
   modalForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -126,6 +134,7 @@ export const showModal = async (err, goods = null) => {
       sendData(newProduct, renderModalEror);
     }
   });
+
 
   return;
 };
