@@ -16,3 +16,5 @@ export const renderGoods = (err, array) => {
 
   return true;
 };
+
+

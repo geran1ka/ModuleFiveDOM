@@ -1,7 +1,4 @@
-import { tableBody } from '../const.js';
 import {createElement} from '../function/functionCreateElem.js';
-import { createError } from './createError.js';
-import { getCategory } from './serviceAPI.js';
 
 export const createModal = () => {
   const modal = createElement('div', {
@@ -89,38 +86,6 @@ export const createModal = () => {
       }),
     ],
   });
-
-
-  const inputCategory = createElement('input', {
-    className: 'form__input ',
-    type: 'text',
-    name: 'category',
-    id: 'category',
-    // role: 'combobox',
-    autocomplete: 'off',
-    required: 'required',
-  });
-  const listCategory = createElement('datalist', {
-    className: 'form__input_datalist',
-    id: 'category-list',
-    // role: 'listbox',
-  });
-
-  const renderCategoryOption = (err, array) => {
-    if (err) {
-      const errorElem = createError(err);
-      tableBody.append(errorElem);
-      return;
-    }
-    return array.map(item => listCategory.append(createElement('option', {
-      value: item,
-      textContent: item,
-    })));
-  };
-
-  getCategory(renderCategoryOption);
-
-
   const groupCategory = createElement('div', {
     className: 'group group_category',
   }, {
@@ -130,12 +95,15 @@ export const createModal = () => {
         htmlFor: 'category',
         textContent: 'Категория',
       }),
-      inputCategory,
-      listCategory,
+      createElement('input', {
+        className: 'form__input',
+        type: 'text',
+        name: 'category',
+        id: 'category',
+        required: 'required',
+      }),
     ],
   });
-  inputCategory.setAttribute('list', 'category-list');
-
   const groupUnits = createElement('div', {
     className: 'group group_units',
   }, {
@@ -255,9 +223,159 @@ export const createModal = () => {
       groupDescription,
       groupCount,
       groupPrice,
-    ],
+    ]
   });
 
+
+  // const fieldset = createElement('fieldset', {
+  //   className: 'form__group',
+  // }, {
+  //   parent: modalForm,
+  //   appends: [
+  //     createElement('div', {
+  //       className: 'group group_name',
+  //     }, {
+  //       appends: [
+  //         createElement('label', {
+  //           className: 'form__label',
+  //           htmlFor: 'title',
+  //           textContent: 'Наименование',
+  //         }),
+  //         createElement('input', {
+  //           className: 'form__input',
+  //           type: 'text',
+  //           name: 'title',
+  //           id: 'title',
+  //           required: 'required',
+  //         }),
+  //       ],
+  //     }),
+  //     createElement('div', {
+  //       className: 'group group_category',
+  //     }, {
+  //       appends: [
+  //         createElement('label', {
+  //           className: 'form__label',
+  //           htmlFor: 'category',
+  //           textContent: 'Категория',
+  //         }),
+  //         createElement('input', {
+  //           className: 'form__input',
+  //           type: 'text',
+  //           name: 'category',
+  //           id: 'category',
+  //           required: 'required',
+  //         }),
+  //       ],
+  //     }),
+  //     createElement('div', {
+  //       className: 'group group_units',
+  //     }, {
+  //       appends: [
+  //         createElement('label', {
+  //           className: 'form__label',
+  //           htmlFor: 'units',
+  //           textContent: 'Единицы измерения',
+  //         }),
+  //         createElement('input', {
+  //           className: 'form__input',
+  //           type: 'text',
+  //           name: 'units',
+  //           id: 'units',
+  //           required: 'required',
+  //         }),
+  //       ],
+  //     }),
+  //     createElement('div', {
+  //       className: 'group group_discount',
+  //     }, {
+  //       appends: [
+  //         createElement('label', {
+  //           className: 'form__label',
+  //           htmlFor: 'discount',
+  //           textContent: 'Дисконт',
+  //         }),
+  //         createElement('div', {
+  //           className: 'group-container',
+  //         }, {
+  //           appends: [
+  //             createElement('input', {
+  //               className: 'form__checkbox',
+  //               type: 'checkbox',
+  //               name: 'checkbox',
+  //               arialabel: 'Добавить скидку',
+  //             }),
+  //             createElement('input', {
+  //               className: 'form__input',
+  //               type: 'number',
+  //               name: 'discount',
+  //               min: 0,
+  //               max: 100,
+  //               id: 'discount',
+  //               disabled: 'disabled',
+  //               required: 'required',
+  //             }),
+  //           ],
+  //         }),
+  //       ],
+  //     }),
+  //     createElement('div', {
+  //       className: 'group group_description',
+  //     }, {
+  //       appends: [
+  //         createElement('label', {
+  //           className: 'form__label form__label-description',
+  //           htmlFor: 'description',
+  //           textContent: 'Описание',
+  //         }),
+  //         createElement('textarea', {
+  //           className: 'form__input',
+  //           name: 'description',
+  //           id: 'description',
+  //           cols: 30,
+  //           rows: 5,
+  //           required: 'required',
+  //         }),
+  //       ],
+  //     }),
+  //     createElement('div', {
+  //       className: 'group group_count',
+  //     }, {
+  //       appends: [
+  //         createElement('label', {
+  //           className: 'form__label',
+  //           htmlFor: 'count',
+  //           textContent: 'Количество',
+  //         }),
+  //         createElement('input', {
+  //           className: 'form__input',
+  //           type: 'number',
+  //           name: 'count',
+  //           id: 'count',
+  //           required: 'required',
+  //         }),
+  //       ],
+  //     }),
+  //     createElement('div', {
+  //       className: 'group group_price',
+  //     }, {
+  //       appends: [
+  //         createElement('label', {
+  //           className: 'form__label',
+  //           htmlFor: 'price',
+  //           textContent: 'Цена',
+  //         }),
+  //         createElement('input', {
+  //           className: 'form__input',
+  //           type: 'number',
+  //           name: 'price',
+  //           id: 'price',
+  //           required: 'required',
+  //         }),
+  //       ],
+  //     }),
+  //   ],
+  // });
 
   const groupAddImg = createElement('div', {
     className: 'group group_add-img img',
@@ -361,8 +479,6 @@ export const createModal = () => {
   }, {
     parent: modalContainer,
   });
-
-
 
   return {
     modal,

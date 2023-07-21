@@ -34,8 +34,6 @@ export const showModal = async (err, goods = null) => {
   overlay.append(modal);
   page.append(overlay);
 
-  console.log(modalForm.title);
-
   allowInputOnlySymbol(modalForm, btnAddGoods);
 
   if (goods) {

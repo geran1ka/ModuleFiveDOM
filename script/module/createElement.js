@@ -1,3 +1,5 @@
+import {createElement} from '../function/functionCreateElem.js';
+
 export const createRow = ({id, title, category, units, count, price, discount, image}) => {
   const row = document.createElement('tr');
   row.classList = 'table__row';
@@ -43,4 +45,17 @@ export const createRow = ({id, title, category, units, count, price, discount, i
   </tr>
   `;
   return row;
+};
+
+export const createCategotyList = (err, array) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  const list = array.map(item => {
+    createElement('option', {
+      value: item,
+    });
+  });
+  return list;
 };

@@ -115,6 +115,7 @@
 
 .group_category {
   grid-area: category;
+  position: relative;
 }
 
 .group_units {
@@ -333,6 +334,15 @@
   line-height: calc(22/18);
   color: var(--violet, #6d5bd0);
 }
+
+/* .form__input_datalist {
+
+  position: absolute;
+  background-color: black;
+  top: 0;
+  left: 0;
+  width: 100%;
+} */
 
 
 @media (max-width: 740px) {

@@ -9,6 +9,7 @@ const searchForm = document.querySelector('.form-search');
 const search = searchForm.search;
 
 
+
 export {
   URL,
   page,
@@ -16,5 +17,5 @@ export {
   tableBody,
   btnAddProduct,
   searchForm,
-  search
+  search,
 };
