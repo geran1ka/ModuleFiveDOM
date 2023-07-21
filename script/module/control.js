@@ -4,11 +4,13 @@ import {
   btnAddProduct,
   URL,
   page,
+  searchForm,
+  search,
 } from '../const.js';
 import {createError} from './createError.js';
 import {showModal} from './showModal.js';
 import {scrollController} from '../function/scrollControl.js';
-import {deleteData, getData, getDataId} from './serviceAPI.js';
+import {deleteData, getData, getDataId, getDataSearch} from './serviceAPI.js';
 
 
 const modalOpen = () => {
@@ -62,9 +64,21 @@ const imageControl = () => {
   });
 };
 
+const searchController = () => {
+  let delay;
+  searchForm.addEventListener('input', (e) => {
+    e.preventDefault();
+    clearTimeout(delay);
+    delay = setTimeout(() => {
+      getDataSearch(renderGoods, search.value);
+    }, 300);
+  });
+};
+
 export {
   modalOpen,
   deleteControl,
   imageControl,
   renderModalEror,
+  searchController,
 };

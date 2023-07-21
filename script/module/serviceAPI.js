@@ -8,6 +8,7 @@ export const getData = (callback) => fetchRequest(`${URL}/api/goods`, {
   callback,
 });
 
+
 export const getDataId = (callback, id) => fetchRequest(`${URL}/api/goods/${id}`, {
   method: 'GET',
   callback,
@@ -39,4 +40,14 @@ export const deleteData = (elem, renderGoods, id) => fetchRequest(`${URL}/api/go
       getData(renderGoods);
     }
   },
+});
+
+export const getCategory = (callback) => fetchRequest(`${URL}/api/category`, {
+  method: 'get',
+  callback,
+});
+
+export const getDataSearch = (callback, search) => fetchRequest(`${URL}/api/goods?search=${search}`, {
+  method: 'get',
+  callback,
 });
