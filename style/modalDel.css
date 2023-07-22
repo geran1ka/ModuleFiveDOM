@@ -54,32 +54,32 @@
 }
 
 .btn_del {
-  background-color: crimson;
-  border-color: crimson;
+  background-color: var(--crimson, crimson);
+  border-color: var(--crimson, crimson);
 }
 
 .btn_del:hover {
-  background-color: rgb(249, 3, 52);
-  border-color:  rgb(249, 3, 52);
+  background-color: var(--crimson-dark, rgb(249, 3, 52));
+  border-color: var(--crimson-dark, rgb(249, 3, 52));
 }
 
 .btn_del:active {
-  border-color:  black  ;
+  border-color:  var(--black, black);
   transform: scale(0.95);
 }
 
 .btn_cancel {
-  background-color: green;
-  border-color: green;
+  background-color: var(--green, green);
+  border-color: var(--green, green);
 }
 
 .btn_cancel:hover {
-  background-color: rgb(13, 200, 13);
-  border-color: rgb(13, 200, 13);
+  background-color: var(--green-light, rgb(13, 200, 13));
+  border-color: var(--green-light, rgb(13, 200, 13));
 }
 
 .btn_cancel:active {
-  border-color:  black  ;
+  border-color:  var(--black, black)  ;
   transform: scale(0.95);
 }
 

@@ -1,8 +1,6 @@
 import {createElement} from '../function/functionCreateElem.js';
-// import {loadStyle} from '../function/loadStyle.js';
 
 export const createError = (err) =>
-// loadStyle('style/showEror.css');
 
   createElement('div', {
     className: 'overlay overlay_active',

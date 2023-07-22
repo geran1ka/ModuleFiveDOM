@@ -1,7 +1,6 @@
-import { page } from '../const.js';
+import {page} from '../const.js';
 import {createElement} from '../function/functionCreateElem.js';
-import { createOverlay } from './createOverlay.js';
-// import {loadStyle} from '../function/loadStyle.js';
+import {createOverlay} from './createOverlay.js';
 
 export const createDelMessage = (title) => {
   const overlay = createOverlay();
@@ -52,12 +51,11 @@ export const createDelMessage = (title) => {
 
   btnWrapper.append(btnDel, btnCancel);
   modalDel.append(delTitle, delSubTitle, btnWrapper, btnClose);
-  
+
   page.append(overlay);
   return {
     overlay,
     btnDel,
     btnCancel,
-    btnClose,
   };
 };

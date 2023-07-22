@@ -8,6 +8,11 @@
   --light-gray: #c6c2de;
   --gray: #c5c5c5;
   --persian-blue: #4636c3;
+  --crimson: crimson;
+  --crimson-dark: rgb(249, 3, 52);
+  --green: green;
+  --green-light: rgb(13, 200, 13);
+  --balck: var(--balck)
 }
 
 .container {

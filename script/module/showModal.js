@@ -5,7 +5,7 @@ import {toBase64} from '../function/toBase64.js';
 import {sendData, updateData} from './serviceAPI.js';
 import {createModal} from './createModal.js';
 import {createOverlay} from './createOverlay.js';
-import { allowInputOnlySymbol } from '../function/allowInputOnlySymbol.js';
+import {allowInputOnlySymbol} from '../function/allowInputOnlySymbol.js';
 
 export const showModal = async (err, goods = null) => {
   await loadStyle('style/showModal.css');
@@ -72,24 +72,6 @@ export const showModal = async (err, goods = null) => {
     } else {
       totalPriceGoods.textContent = '$ ' + Math.round(modalForm.price.value * modalForm.count.value);
     }
-    /*
-    if (modalForm.image.files.length > 0) {
-      if (modalForm.image.files[0].size > 1000000) {
-        messageError.style.display = 'flex';
-        modalForm.image.value = '';
-        preview.src = '';
-        imageWrapper.style.display = '';
-        addImg.textContent = 'Добавить изображение';
-      } else {
-        const src = window.URL.createObjectURL(modalForm.image.files[0]);
-        messageError.style.display = 'none';
-        imageWrapper.style.display = 'block';
-        groupAddImg.style.rowGap = '30px';
-        preview.src = src;
-        addImg.textContent = 'Изменить изображение';
-      }
-    }
-    */
   });
 
   modalForm.image.addEventListener('change', () => {

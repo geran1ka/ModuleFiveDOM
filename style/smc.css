@@ -230,7 +230,7 @@
 
 .table__cell-units {
   text-align: center;
-  width: 67px;
+  min-width: 68px;
 }
 
 .table__cell-count {

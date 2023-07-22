@@ -28,20 +28,20 @@ const modalOpen = () => {
   });
 };
 
-const deleteControl = (data) => {
+const deleteControl = () => {
   tableBody.addEventListener('click', (e) => {
     const target = e.target;
-    console.log('target: ', target);
-
 
     if (target.closest('.button-table_del')) {
       const row = target.closest('.table__row');
       const cellTitle = row.querySelector('.table__cell-name').textContent;
       const {btnDel, btnCancel, overlay} = createDelMessage(cellTitle);
+
       btnDel.addEventListener('click', () => {
         deleteData(tableBody, renderGoods, target.closest('.table__row').id);
-        console.log('click');
+        overlay.remove();
       });
+
       btnCancel.addEventListener('click', (e) => {
         overlay.remove();
       });

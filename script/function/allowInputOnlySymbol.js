@@ -11,7 +11,6 @@ export const allowInputOnlySymbol = (modalForm, btnAddGoods) => {
     if (target === modalForm.count || target === modalForm.discount || target === modalForm.price) {
       target.value = target.value.replace(/[^0-9]/g, '');
     }
-    console.log('modalForm.description.value: ', modalForm.description.value.length);
 
     if (target === modalForm.description) {
       target.value = target.value.replace(/[^а-яё\s]/gi, '');

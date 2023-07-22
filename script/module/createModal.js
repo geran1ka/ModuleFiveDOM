@@ -1,7 +1,7 @@
-import { tableBody } from '../const.js';
+import {tableBody} from '../const.js';
 import {createElement} from '../function/functionCreateElem.js';
-import { createError } from './createError.js';
-import { getCategory } from './serviceAPI.js';
+import {createError} from './createError.js';
+import {getCategory} from './serviceAPI.js';
 
 export const createModal = () => {
   const modal = createElement('div', {
@@ -49,7 +49,6 @@ export const createModal = () => {
           `,
   });
 
-
   const modalForm = createElement('form', {
     className: 'modal__form form',
     name: 'formAddProduct',
@@ -70,7 +69,6 @@ export const createModal = () => {
     },
   });
 
-
   const groupName = createElement('div', {
     className: 'group group_name',
   }, {
@@ -89,7 +87,6 @@ export const createModal = () => {
       }),
     ],
   });
-
 
   const inputCategory = createElement('input', {
     className: 'form__input ',
@@ -120,7 +117,6 @@ export const createModal = () => {
 
   getCategory(renderCategoryOption);
 
-
   const groupCategory = createElement('div', {
     className: 'group group_category',
   }, {
@@ -134,6 +130,7 @@ export const createModal = () => {
       listCategory,
     ],
   });
+
   inputCategory.setAttribute('list', 'category-list');
 
   const groupUnits = createElement('div', {
@@ -187,6 +184,7 @@ export const createModal = () => {
       }),
     ],
   });
+
   const groupDescription = createElement('div', {
     className: 'group group_description',
   }, {
@@ -206,6 +204,7 @@ export const createModal = () => {
       }),
     ],
   });
+
   const groupCount = createElement('div', {
     className: 'group group_count',
   }, {
@@ -224,6 +223,7 @@ export const createModal = () => {
       }),
     ],
   });
+
   const groupPrice = createElement('div', {
     className: 'group group_price',
   }, {
@@ -258,7 +258,6 @@ export const createModal = () => {
     ],
   });
 
-
   const groupAddImg = createElement('div', {
     className: 'group group_add-img img',
   }, {
@@ -271,7 +270,6 @@ export const createModal = () => {
       accept: 'image/*',
     }),
   });
-
 
   const messageError = createElement('p', {
     className: 'img__error',
@@ -361,8 +359,6 @@ export const createModal = () => {
   }, {
     parent: modalContainer,
   });
-
-
 
   return {
     modal,
