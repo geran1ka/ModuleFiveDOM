@@ -351,6 +351,9 @@
 
 @media (max-width: 740px) {
   .container__group {
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -375,7 +378,7 @@
     justify-self: start;
   }
 
-  .search {
+  .form-search {
     grid-area: search;
   }
 
@@ -385,7 +388,7 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 440px) {
   .title {
     font-size: 20px;
   }

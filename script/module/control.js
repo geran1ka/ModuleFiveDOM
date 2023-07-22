@@ -11,8 +11,8 @@ import {createError} from './createError.js';
 import {showModal} from './showModal.js';
 import {scrollController} from '../function/scrollControl.js';
 import {deleteData, getData, getDataId, getDataSearch} from './serviceAPI.js';
-import { createElement } from '../function/functionCreateElem.js';
-import { createOverlay } from './createOverlay.js';
+
+import {createDelMessage} from './createDelMessage.js';
 
 
 const modalOpen = () => {
@@ -31,35 +31,21 @@ const modalOpen = () => {
 const deleteControl = (data) => {
   tableBody.addEventListener('click', (e) => {
     const target = e.target;
+    console.log('target: ', target);
 
-    
-    const overlay = createOverlay();
-    const createModalDel = createElement('div', {
-      className: 'modal-del',
-    }, {
-      parent: overlay,
-      appends: [
-        createElement('h2', {
-          className: 'modal-del__title',
-          textContent: `Вы действительно хотите удалить данный товар`,
-        }),
-        createElement('button', {
-          className: 'modal__close',
-          type: 'button',
-          ariaLabel: 'Закрыть',
-          innerHTML: `
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 2L22 22" stroke="#currentColor" stroke-width="3" stroke-linecap="round"/>
-              <path d="M2 22L22 2" stroke="#currentColor" stroke-width="3" stroke-linecap="round"/>
-            </svg> 
-            `,
-        }),
-      ],
-    });
-    page.append(overlay);
-    // if (target.closest('.button-table_del')) {
-    //   deleteData(tableBody, renderGoods, target.closest('.table__row').id);
-    // }
+
+    if (target.closest('.button-table_del')) {
+      const row = target.closest('.table__row');
+      const cellTitle = row.querySelector('.table__cell-name').textContent;
+      const {btnDel, btnCancel, overlay} = createDelMessage(cellTitle);
+      btnDel.addEventListener('click', () => {
+        deleteData(tableBody, renderGoods, target.closest('.table__row').id);
+        console.log('click');
+      });
+      btnCancel.addEventListener('click', (e) => {
+        overlay.remove();
+      });
+    }
   });
 };
 

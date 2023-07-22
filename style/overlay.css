@@ -12,3 +12,9 @@
   padding: 10px;
   overflow-y: auto;
 }
+
+@media (max-width: 740px) {
+  .overlay {
+    align-items: start;
+  }
+}
