@@ -333,7 +333,7 @@
   color: var(--violet, #6d5bd0);
 }
 
-.symbol-error {
+.form__error {
   margin: 0;
   position: absolute;
   right: 0;

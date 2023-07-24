@@ -14,7 +14,7 @@ const isCheckMinLengthDescription = (minLength, modalForm, btnAddGoods) => {
 const checkSymbolInput = (target, regExp) => {
   if (target.value.match(regExp)) {
     const symbol = createElement('p', {
-      className: 'symbol-error',
+      className: 'form__error',
       textContent: 'Не допустисый символ',
     }, {parent: target.closest('.group')});
     setTimeout(() => {
