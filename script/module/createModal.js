@@ -94,27 +94,14 @@ export const createModal = () => {
     type: 'text',
     name: 'category',
     id: 'category',
-    // role: 'combobox',
     autocomplete: 'off',
     required: 'required',
   });
+
   const listCategory = createElement('datalist', {
     className: 'form__input_datalist',
     id: 'category-list',
-    // role: 'listbox',
   });
-
-  // const renderCategoryOption = (err, array) => {
-  //   if (err) {
-  //     const errorElem = createError(err);
-  //     tableBody.append(errorElem);
-  //     return;
-  //   }
-  //   return array.map(item => listCategory.append(createElement('option', {
-  //     value: item,
-  //     textContent: item,
-  //   })));
-  // };
 
   getCategory(renderCategoryOption)
       .then(array => listCategory.append(...array));

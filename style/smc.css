@@ -166,6 +166,13 @@
   color:var(--persian-blue, #4636c3);
 }
 
+.button-add-product:disabled {
+  background-color:var(--gray, #c5c5c5);
+  color:var(--main-bg-color, #ffffff);
+  pointer-events: none;
+  border-color: var(--gray, #c5c5c5);
+}
+
 .scroll-box {
   overflow-x: auto;
   scroll-behavior: smooth;
