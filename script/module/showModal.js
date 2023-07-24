@@ -65,6 +65,8 @@ export const showModal = async (err, goods = null) => {
 
   modalForm.addEventListener('change', () => {
     if (modalForm.discount.value) {
+      console.log('modalForm.discount.value: ', modalForm.discount.value);
+
       modalForm.discount.value < 100 ? totalPriceGoods.textContent =
       '$ ' + Math.round(modalForm.price.value * modalForm.count.value -
         modalForm.price.value * modalForm.count.value * modalForm.discount.value / 100) :

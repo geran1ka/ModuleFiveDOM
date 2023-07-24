@@ -161,7 +161,7 @@ export const createModal = () => {
           }),
           createElement('input', {
             className: 'form__input',
-            type: 'number',
+            // type: 'number',
             name: 'discount',
             min: 0,
             max: 100,
@@ -205,7 +205,7 @@ export const createModal = () => {
       }),
       createElement('input', {
         className: 'form__input',
-        type: 'number',
+        // type: 'number',
         name: 'count',
         id: 'count',
         required: 'required',
@@ -224,7 +224,7 @@ export const createModal = () => {
       }),
       createElement('input', {
         className: 'form__input',
-        type: 'number',
+        // type: 'number',
         name: 'price',
         id: 'price',
         required: 'required',
