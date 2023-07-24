@@ -4,6 +4,7 @@ const isCheckMinLengthDescription = (minLength, modalForm, btnAddGoods) => {
   if (modalForm.description.value.length > minLength) {
     btnAddGoods.removeAttribute('disabled');
   } else {
+    btnAddGoods.setAttribute('disabled', 'disabled');
     modalForm.querySelector('.form__label-description').textContent =
       `Описание ${minLength - modalForm.description.value.length > 0 ?
         `Осталось ввести ${minLength - modalForm.description.value.length}` : ''}`;
